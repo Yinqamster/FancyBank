@@ -11,21 +11,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Utils.Config;
+import Utils.ErrCode;
+import controller.ManagerController;
 
 import javax.swing.JButton;
 
 public class ManagerInterface extends JFrame{
+	
+	ManagerController managerController = ManagerController.getInstance();
 
 	public ManagerInterface(String username){
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		
+		JButton back = new JButton("");
+		back.setIcon(new ImageIcon("./src/back.png"));
+		back.setBounds(6, 6, 35, 35);
+		panel.add(back);
+		
+		JButton logout = new JButton("");
+		logout.setIcon(new ImageIcon("./src/logout.png"));
+		logout.setBounds(452, 6, 35, 35);
+		panel.add(logout);
+		
 		JLabel background = new JLabel();
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
-		
-		JButton back = new JButton("<");
-		back.setBounds(6, 6, 42, 29);
+		panel.add(background);
 
 		JPanel titlePanel = new JPanel();
 		JLabel title = new JLabel("Manager   System");
@@ -39,21 +52,23 @@ public class ManagerInterface extends JFrame{
 		operationPanel.setLocation(150, 200);
 		
 		JButton checkCustomer = new JButton("Check Customer");
+		checkCustomer.setFont(new Font("Helvetica", Font.PLAIN, 15));
+		checkCustomer.setIcon(new ImageIcon("./src/user.png"));
 		operationPanel.add(checkCustomer);
 		JButton getDailyReport = new JButton("Get Daily Report");
+		getDailyReport.setIcon(new ImageIcon("./src/report.png"));
+		getDailyReport.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(getDailyReport);
 		JButton setConfig = new JButton("Set Config");
+		setConfig.setIcon(new ImageIcon("./src/setting.png"));
+		setConfig.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(setConfig);
-		
 		
 		panel.add(titlePanel);
 		panel.add(operationPanel);
 		
-		panel.add(back);
-		panel.add(background);
 		
-		this.add(panel);
-		
+		getContentPane().add(panel);
 		this.setTitle( "Bank ATM Manager System" );
 		this.setResizable(false);
 		this.setSize(500, 500);
@@ -68,6 +83,22 @@ public class ManagerInterface extends JFrame{
 				// TODO Auto-generated method stub
 				ManagerInterface.this.dispose();
 				new Login(Config.MANAGER);
+			}
+		});
+		
+		logout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int res = managerController.logout(username);
+				if(res == ErrCode.OK) {
+					new Login(Config.MANAGER);
+				}
+				else {
+					//this shouldn't happen
+					System.out.println("Logout Error");
+				}
 			}
 		});
 		

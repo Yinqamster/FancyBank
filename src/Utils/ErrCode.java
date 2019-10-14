@@ -2,6 +2,7 @@ package Utils;
 
 public class ErrCode {
 
+	public static int ERROR = 0;
 	public static int OK = 1;
 	
 	public static int MISSFIRSTNAME = 101;
@@ -27,4 +28,8 @@ public class ErrCode {
 	public static int WRONGPASSWORD = 10801;
 	public static int MISSCOMFIRMPASSWORD = 10802;
 	public static int WRONGCOMFIRMPASSWORD = 10803;
+	
+	public static int NOENOUGHMONEY = 201;
+	
+	public static int NOSUCHCURRENCY = 301;
 }

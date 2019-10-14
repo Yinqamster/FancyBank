@@ -39,8 +39,9 @@ public class Login extends JFrame{
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 		
-		JButton back = new JButton("<");
-		back.setBounds(6, 6, 42, 29);
+		JButton back = new JButton("");
+		back.setIcon(new ImageIcon("/Users/qiyin/Documents/eclipse/workspace/BankATM/src/back.png"));
+		back.setBounds(6, 6, 35, 35);
 
 		JPanel titlePanel = new JPanel();
 		JLabel title = new JLabel(identity + "   Login");
@@ -76,7 +77,7 @@ public class Login extends JFrame{
 		contentPanel.add(panel);
 		contentPanel.add(background);
 		
-		this.add(contentPanel);
+		getContentPane().add(contentPanel);
 		this.setTitle( "Bank ATM Login" );
 		this.setResizable(false);
 		this.setSize(500, 500);

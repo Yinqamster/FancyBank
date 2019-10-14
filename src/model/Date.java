@@ -18,6 +18,13 @@ public class Date {
 		this.day = day;
 	}
 	
+	public Date(int month, int day, int year, int hour, int minute, int second) {
+		this(month, day, year);
+		this.hour = hour;
+		this.minute = minute;
+		this.second = second;
+	}
+	
 	public int getYear() {
 		return this.year;
 	}
@@ -30,8 +37,11 @@ public class Date {
 		return this.day;
 	}
 	
+	
 	public String toString() {
 		String string = "" + month + "/" + day + "/" + year;
 		return string;
 	}
+	
+	
 }

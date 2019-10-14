@@ -65,6 +65,33 @@ public class ManagerController implements BankATMInterface{
 		Config.managerList.put(username, manager);
 		return ErrCode.OK;
 	}
+
+	@Override
+	public int logout(String username) {
+		// TODO Auto-generated method stub
+		if(UtilFunction.checkName(username, Config.MANAGER) != ErrCode.OK) {
+			return UtilFunction.checkName(username, Config.MANAGER);
+		}
+		Manager manager = Config.managerList.get(username);
+		manager.setStatus(Config.NOTLOGGEDIN);
+		Config.managerList.put(username, manager);
+		return ErrCode.OK;
+	}
+	
+	public int checkCustomer() {
+		
+		return ErrCode.OK;
+	}
+	
+	public int getDailyReport() {
+		
+		return ErrCode.OK;
+	}
+	
+	public int setConfig(String currencyName) {
+		
+		return ErrCode.OK;
+	}
 	
 	
 }

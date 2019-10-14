@@ -52,6 +52,10 @@ public class User extends Person{
 		this.status = status;
 	}
 	
+	public Map<Integer, Account> getAccounts() {
+		return this.accounts;
+	}
+	
 	public void print() {
 		System.out.println("================================================");
 		System.out.println("User ID: " + this.getID());

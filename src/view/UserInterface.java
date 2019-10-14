@@ -11,8 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Utils.Config;
+import Utils.ErrCode;
+import controller.UserController;
 
 public class UserInterface extends JFrame{
+	
+	UserController userController = UserController.getInstance();
 	
 	public UserInterface(String username) {
 		JPanel panel = new JPanel();
@@ -31,14 +35,19 @@ public class UserInterface extends JFrame{
 		titlePanel.setOpaque(false);
 		titlePanel.setBounds(50, 80, 400, 50);
 		
-		JButton back = new JButton("<");
-		back.setBounds(6, 6, 42, 29);
+		JButton back = new JButton("");
+		back.setIcon(new ImageIcon("./src/back.png"));
+		back.setBounds(6, 6, 35, 35);
+		panel.add(back);
 		
+		JButton logout = new JButton("");
+		logout.setIcon(new ImageIcon("./src/logout.png"));
+		logout.setBounds(452, 6, 35, 35);
+		panel.add(logout);
+
 		
 		
 		panel.add(titlePanel);
-		
-		panel.add(back);
 		panel.add(background);
 		this.add(panel);
 		
@@ -56,6 +65,22 @@ public class UserInterface extends JFrame{
 				// TODO Auto-generated method stub
 				UserInterface.this.dispose();
 				new Login(Config.USER);
+			}
+		});
+		
+		logout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int res = userController.logout(username);
+				if(res == ErrCode.OK) {
+					new Login(Config.USER);
+				}
+				else {
+					//this shouldn't happen
+					System.out.println("Logout Error");
+				}
 			}
 		});
 	}

@@ -1,5 +1,6 @@
 package Utils;
 
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -164,6 +165,17 @@ public class UtilFunction {
         return true;
 	}
 	
+	
+	public static Date now() {
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		int hour = calendar.get(Calendar.HOUR);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		return new Date(month, day, year, hour, minute, second);
+	}
 	
 	
 	
