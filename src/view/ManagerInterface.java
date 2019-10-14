@@ -11,13 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Utils.Config;
-import controller.UserController;
 
 import javax.swing.JButton;
 
 public class ManagerInterface extends JFrame{
-	
-	
 
 	public ManagerInterface(String username){
 		JPanel panel = new JPanel();
@@ -51,8 +48,6 @@ public class ManagerInterface extends JFrame{
 		
 		panel.add(titlePanel);
 		panel.add(operationPanel);
-//		getContentPane().add(panel);
-		
 		
 		panel.add(back);
 		panel.add(background);

@@ -70,7 +70,6 @@ public class ChooseIdentity extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("press user");
 				ChooseIdentity.this.dispose();
 				new Login(Config.USER);
 				
@@ -82,7 +81,6 @@ public class ChooseIdentity extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("press manager");
 				ChooseIdentity.this.dispose();
 				new Login(Config.MANAGER);
 			}

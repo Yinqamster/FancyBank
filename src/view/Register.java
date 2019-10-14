@@ -32,6 +32,7 @@ public class Register extends JFrame {
 	public Register(String identity) {
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(null);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(40, 180, 400, 500);
 		panel.setLayout(new GridLayout(10, 2, 10, 15));
@@ -40,7 +41,6 @@ public class Register extends JFrame {
 		ImageIcon bg=new ImageIcon("./src/login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
-		
 
 		JPanel titlePanel = new JPanel();
 		JLabel title = new JLabel(identity + "   Register");
@@ -49,68 +49,76 @@ public class Register extends JFrame {
 		titlePanel.setOpaque(false);
 		titlePanel.setBounds(50, 80, 400, 50);
 		
-		
-		JLabel firstName = new JLabel("First Name:");
+		JLabel firstName = new JLabel("First Name*:");
 		firstName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(firstName);
 		firstName.setFont(new Font("Helvetica",Font.PLAIN,15));
-		JTextField fname = new JTextField(5);
+		JTextField fname = new JTextField(10);
 		fname.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(fname);
 		
 		JLabel middleName = new JLabel("Middle Name：");
 		middleName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(middleName);
+		middleName.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField mname = new JTextField(10);
+		mname.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(mname);
 		
-		JLabel lastName = new JLabel("Last Name:");
+		JLabel lastName = new JLabel("Last Name*:");
 		lastName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lastName);
 		lastName.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField lname = new JTextField(10);
+		lname.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(lname);
 		
-		JLabel username = new JLabel("Username:");
+		JLabel username = new JLabel("Username*:");
 		username.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(username);
 		username.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField uname = new JTextField(10);
+		uname.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(uname);
 		
-		JLabel phoneNumber = new JLabel("Phone Number:");
+		JLabel phoneNumber = new JLabel("Phone Number*:");
 		phoneNumber.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(phoneNumber);
 		phoneNumber.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField pnumber = new JTextField(10);
+		pnumber.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(pnumber);
 		
-		JLabel email = new JLabel("Email:");
+		JLabel email = new JLabel("Email*:");
 		email.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(email);
 		email.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField em = new JTextField(10);
+		em.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(em);
 		
-		JLabel birthday = new JLabel("Birthday:");
+		JLabel birthday = new JLabel("Birthday*:");
 		birthday.setHorizontalAlignment(SwingConstants.RIGHT);
 		birthday.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField date = new JTextField(3);
+		date.setHorizontalAlignment(SwingConstants.LEFT);
 		date.setToolTipText("mm/dd/yyyy");
 		panel.add(birthday);
 		panel.add(date);
 		
-		JLabel password = new JLabel("Password:");
+		JLabel password = new JLabel("Password*:");
 		password.setHorizontalAlignment(SwingConstants.RIGHT);
 		password.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JPasswordField pwd = new JPasswordField(10);
+		pwd.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(password);
 		panel.add(pwd);
 
-		JLabel confirmPassword = new JLabel("Confirm Password:");
+		JLabel confirmPassword = new JLabel("Confirm Password*:");
 		confirmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		confirmPassword.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JPasswordField cpwd = new JPasswordField(10);
+		cpwd.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(confirmPassword);
 		panel.add(cpwd);
 
@@ -125,8 +133,7 @@ public class Register extends JFrame {
 		contentPanel.add(panel);
 		contentPanel.add(background);
 		
-		getContentPane().add(contentPanel);
-		
+		this.add(contentPanel);
 		this.setTitle( "Bank ATM Register" );
 		this.setResizable(false);
 		this.setSize(500, 750);
@@ -139,7 +146,6 @@ public class Register extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-//				
 				Name name = new Name(fname.getText(), mname.getText(), lname.getText(), uname.getText());
 				String phoneNum = pnumber.getText();
 				String email = em.getText();

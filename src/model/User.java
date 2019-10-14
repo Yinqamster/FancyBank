@@ -40,8 +40,16 @@ public class User extends Person{
 		return maxId;
 	}
 	
+	public String getPassword() {
+		return this.password;
+	}
+	
 	public int getStatus() {
 		return this.status;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	public void print() {
