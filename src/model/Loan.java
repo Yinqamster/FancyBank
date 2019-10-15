@@ -33,6 +33,10 @@ public class Loan {
 		return this.number;
 	}
 	
+	public String getCollateral() {
+		return this.collateral;
+	}
+	
 	public String getCurrency() {
 		return this.currency;
 	}

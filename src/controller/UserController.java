@@ -291,7 +291,7 @@ public class UserController implements BankATMInterface{
 		return bank.getUserList().get(username).getLoanList();
 	}
 	
-	public int takeLoan(String username, String name, String collateral, String currency, BigDecimal number, String dueDate) {
+	public int takeLoan(String username, String name, String collateral, String currency, String number, String dueDate) {
 		User user = bank.getUserList().get(username);
 		
 		if(name.isEmpty() || name == null) {
@@ -303,7 +303,7 @@ public class UserController implements BankATMInterface{
 		if(collateral.isEmpty() || collateral == null) {
 			return ErrCode.COLLATERALEMPTY;
 		}
-		if(number.equals(BigDecimal.ZERO) || number == null) {
+		if(number.isEmpty() || number == null || !UtilFunction.isNumber(number)) {
 			return ErrCode.LOANNUMBEREMPTY;
 		}
 		if(UtilFunction.checkDate(dueDate) != ErrCode.OK) {
@@ -312,7 +312,7 @@ public class UserController implements BankATMInterface{
 		
 		Date startDate = UtilFunction.now();
 		Date endDate = UtilFunction.stringToDate(dueDate);
-		Loan loan = new Loan(name, collateral, currency, number, startDate, endDate, Config.PROCESSING);
+		Loan loan = new Loan(name, collateral, currency, new BigDecimal(number), startDate, endDate, Config.PROCESSING);
 		user.addLoan(loan);
 		bank.addUser(username, user);
 		

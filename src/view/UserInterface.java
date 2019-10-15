@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Utils.Config;
@@ -130,26 +131,41 @@ public class UserInterface extends JFrame{
 		
 		JPanel loanPanel = new JPanel();
 		loanPanel.setBounds(50, YBegin, 400, loanPanelHeight);
-		loanPanel.setLayout(new GridLayout(loanRows, 2, 5, 5));
+		loanPanel.setLayout(new GridLayout(loanRows, 3, 5, 5));
 		loanPanel.setBorder(new LineBorder(Color.DARK_GRAY, 1, true));  
 		
 		JLabel LoanLabel = new JLabel("Loan");
 		LoanLabel.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		JButton takeLoan = new JButton("Take Loan");
+		JLabel emptyLable = new JLabel();
 		loanPanel.add(LoanLabel);
+		loanPanel.add(emptyLable);
 		loanPanel.add(takeLoan);
 		
 		JLabel loanName = new JLabel("Name");
 		JLabel loanNumber = new JLabel("Number");
+		JLabel loanOperation = new JLabel("Operation");
 		
 		if(hasLoan){
 			loanPanel.add(loanName);
 			loanPanel.add(loanNumber);
-			for(int i = 0; i < loanList.size(); i++) {
-				JLabel na = new JLabel(loanList.get(i).getName());
-				JLabel nu = new JLabel(String.valueOf(loanList.get(i).getNumber()));
+			loanPanel.add(loanOperation);
+			for(Loan loan : loanList.values()) {
+				JLabel na = new JLabel(loan.getName());
+				JLabel nu = new JLabel(String.valueOf(loan.getNumber()));
 				loanPanel.add(na);
 				loanPanel.add(nu);
+				JButton oper = new JButton("Pay");
+				oper.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						UserInterface.this.dispose();
+						new TakeLoan(username, loan.getName());
+					}
+				});
+				loanPanel.add(oper);
 			}
 		}
 		
@@ -209,9 +225,20 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				userController.createAccount(username, Config.CHECKINGACCOUNT, Config.DEFAULTCURRENCY, BankController.getBank().getOpenAccountFee());
-				UserInterface.this.dispose();
-				new UserInterface(username);
+				int res = userController.createAccount(username, Config.CHECKINGACCOUNT, Config.DEFAULTCURRENCY, BankController.getBank().getOpenAccountFee());
+				if(res == ErrCode.OK) {
+					UserInterface.this.dispose();
+					new UserInterface(username);
+				}
+				else {
+					Object[] options = {"OK"};
+			        JOptionPane.showOptionDialog(null,  
+			                res, "Error",  
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null,   
+			                options,   
+			                options[0]); 
+				}
+				
 			}
 		});
 		
@@ -220,9 +247,19 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				userController.createAccount(username, Config.SAVINGACCOUNT, Config.DEFAULTCURRENCY, BankController.getBank().getOpenAccountFee());
-				UserInterface.this.dispose();
-				new UserInterface(username);
+				int res = userController.createAccount(username, Config.SAVINGACCOUNT, Config.DEFAULTCURRENCY, BankController.getBank().getOpenAccountFee());
+				if(res == ErrCode.OK) {
+					UserInterface.this.dispose();
+					new UserInterface(username);
+				}
+				else {
+					Object[] options = {"OK"};
+			        JOptionPane.showOptionDialog(null,  
+			                res, "Error",  
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null,   
+			                options,   
+			                options[0]); 
+				}
 			}
 		});
 		
@@ -267,6 +304,8 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				UserInterface.this.dispose();
+				new TakeLoan(username, "");
 				
 			}
 		});

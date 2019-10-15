@@ -172,11 +172,22 @@ public class UtilFunction {
 	}
 	
 	public static String generateAccountNumber() {
-		String number = String.valueOf((int)Math.random()*Config.ACCOUNTNUMBERLENGTH);
-		while(BankController.getBank().getAccountList().containsKey(number)) {
-			number = String.valueOf((int)Math.random()*Config.ACCOUNTNUMBERLENGTH);
-		}
-		return number;
+		String str="0123456789";
+	    Random random=new Random();
+	    StringBuffer sb=new StringBuffer();
+	    for(int i=0;i<Config.ACCOUNTNUMBERLENGTH;i++){
+	    	int number=random.nextInt(10);
+	    	sb.append(str.charAt(number));
+	    }
+	    String resStr =  sb.toString();
+	    while(BankController.getBank().getAccountList().containsKey(resStr)) {
+	    	for(int i=0;i<Config.ACCOUNTNUMBERLENGTH;i++){
+		    	int number=random.nextInt(10);
+		    	sb.append(str.charAt(number));
+		    }
+		    resStr =  sb.toString();
+	    }
+	    return resStr;
 	}
 	
 	public static String generateTransactionID() {

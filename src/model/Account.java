@@ -1,6 +1,8 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,12 @@ public class Account {
 	private String accountNumber;
 	private Map<String, BigDecimal> balance;
 	private List<Transaction> transactionDetails;
+	
+	public Account() {
+		// TODO Auto-generated constructor stub
+		balance = new HashMap<String, BigDecimal>();
+		transactionDetails = new ArrayList<Transaction>();
+	}
 	
 	public int getAccountType(){
 		return this.accountType;
