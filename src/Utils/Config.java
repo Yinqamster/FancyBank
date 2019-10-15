@@ -23,7 +23,7 @@ public class Config {
 	public static final int PASSED = 1;
 	public static final int PAIED = 2;
 	
-	//transaction status
+	//transaction type
 	public static final int DEPOSIT = 1;
 	public static final int WITHDRAW = 2;
 	public static final int TRANSFEROUT = 3;

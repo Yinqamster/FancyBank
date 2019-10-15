@@ -106,7 +106,7 @@ public class UserController implements BankATMInterface{
 		return account;
 	}
 	
-	public int deposit(String username, int accountType, String accountNumber, BigDecimal number, String currency, String remarks){
+	public int deposit(String username, int accountType, String accountNumber, String amount, String currency, String remarks){
 		if(!bank.getCurrencyList().containsKey(currency)) {
 			return ErrCode.NOSUCHCURRENCY;
 		}
@@ -120,6 +120,13 @@ public class UserController implements BankATMInterface{
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
+		if(amount.isEmpty() || amount == null) {
+			return ErrCode.MISSAMOUNT;
+		}
+		if(!UtilFunction.isNumber(amount)) {
+			return ErrCode.AMOUNTNOTANUMBER;
+		}
+		BigDecimal number = new BigDecimal(amount);
 		Map<String, BigDecimal> balanceList = account.getBalance();
 		BigDecimal oldBalance = new BigDecimal("0");
 		if(balanceList.containsKey(currency)){
@@ -138,7 +145,7 @@ public class UserController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
-	public int withdraw(String username, int accountType, String accountNumber, BigDecimal number, String currency, String remarks) {
+	public int withdraw(String username, int accountType, String accountNumber, String amount, String currency, String remarks) {
 		if(!bank.getCurrencyList().containsKey(currency)) {
 			return ErrCode.NOSUCHCURRENCY;
 		}
@@ -152,6 +159,13 @@ public class UserController implements BankATMInterface{
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
+		if(amount.isEmpty() || amount == null) {
+			return ErrCode.MISSAMOUNT;
+		}
+		if(!UtilFunction.isNumber(amount)) {
+			return ErrCode.AMOUNTNOTANUMBER;
+		}
+		BigDecimal number = new BigDecimal(amount);
 		Map<String, BigDecimal> balanceList = account.getBalance();
 		
 		if(!balanceList.containsKey(currency)){
@@ -177,7 +191,7 @@ public class UserController implements BankATMInterface{
 	}
 	
 	public int transfer(String username, int accountType, String fromAccountNumber, 
-			String toAccountNumber, BigDecimal number, String currency, String remarks) {
+			String toAccountNumber, String amount, String currency, String remarks) {
 		if(!bank.getCurrencyList().containsKey(currency)) {
 			return ErrCode.NOSUCHCURRENCY;
 		}
@@ -192,6 +206,13 @@ public class UserController implements BankATMInterface{
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
+		if(amount.isEmpty() || amount == null) {
+			return ErrCode.MISSAMOUNT;
+		}
+		if(!UtilFunction.isNumber(amount)) {
+			return ErrCode.AMOUNTNOTANUMBER;
+		}
+		BigDecimal number = new BigDecimal(amount);
 		Map<String, BigDecimal> fromBalanceList = fromAccount.getBalance();
 		if(!fromBalanceList.containsKey(currency)){
 			return ErrCode.NOENOUGHMONEY;
@@ -218,7 +239,7 @@ public class UserController implements BankATMInterface{
 			toOldBalance = toBalanceList.get(currency);
 		}
 		BigDecimal toNewBalance = toOldBalance.add(number);
-		toBalanceList.put(currency, newBalance);
+		toBalanceList.put(currency, toNewBalance);
 		toAccount.setBalance(toBalanceList);
 		Transaction toT = new Transaction(number, BigDecimal.ZERO, toNewBalance, UtilFunction.now(), remarks, Config.RECEIVE);
 		toAccount.addTransactionDetails(toT);

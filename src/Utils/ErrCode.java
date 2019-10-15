@@ -30,6 +30,8 @@ public class ErrCode {
 	public static int NOENOUGHMONEY = 201;
 	public static int NOSUCHCURRENCY = 202;
 	public static int NOSUCHACCOUNT = 203;
+	public static int AMOUNTNOTANUMBER = 204;
+	public static int MISSAMOUNT = 20401;
 	
 	//loan
 	public static int LOANNAMEEMPTY = 301;

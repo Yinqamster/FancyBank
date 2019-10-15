@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -74,13 +75,12 @@ public class TakeLoan extends JFrame{
 		}
 		panel.add(cur);
 		
-		JLabel number = new JLabel("Number*: ");
-		number.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(number);
-		number.setFont(new Font("Helvetica",Font.PLAIN,15));
+		JLabel amount = new JLabel("Amount*: ");
+		amount.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(amount);
+		amount.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField num = new JTextField(10);
 		num.setHorizontalAlignment(SwingConstants.LEFT);
-		panel.add(number);
 		panel.add(num);
 		
 		JLabel dueDate = new JLabel("Due Date*: ");
@@ -105,14 +105,17 @@ public class TakeLoan extends JFrame{
 		JLabel sta = new JLabel();
 		sta.setHorizontalAlignment(SwingConstants.LEFT);
 		
+		List<String> checkingAccounts = userController.getAccountList(username, Config.CHECKINGACCOUNT);
+		List<String> savingAccounts = userController.getAccountList(username, Config.SAVINGACCOUNT);
+		
 		JLabel payAccount = new JLabel("Pay Account*：");
 		payAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		payAccount.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JComboBox<String> payAcc = new JComboBox<String>();
-		for(String c : userController.getAccountList(username, Config.CHECKINGACCOUNT)) {
+		for(String c : checkingAccounts) {
 			payAcc.addItem(c);
 		}
-		for(String c : userController.getAccountList(username, Config.SAVINGACCOUNT)) {
+		for(String c : savingAccounts) {
 			payAcc.addItem(c);
 		}
 		

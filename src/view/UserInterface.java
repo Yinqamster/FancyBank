@@ -268,7 +268,8 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				UserInterface.this.dispose();
+				new Transact(username, Config.DEPOSIT);
 			}
 		});
 		
@@ -277,7 +278,8 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				UserInterface.this.dispose();
+				new Transact(username, Config.WITHDRAW);
 			}
 		});
 		
@@ -286,7 +288,8 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				UserInterface.this.dispose();
+				new Transact(username, Config.TRANSFEROUT);
 			}
 		});
 		
