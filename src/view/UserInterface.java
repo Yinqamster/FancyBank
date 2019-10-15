@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -121,7 +122,7 @@ public class UserInterface extends JFrame{
 		}
 		
 		
-		List<Loan> loanList = userController.getLoanList(username);
+		Map<String,Loan> loanList = userController.getLoanList(username);
 		boolean hasLoan = loanList.size() == 0 ? false : true;
 		int loanRows = hasLoan ? 2 + loanList.size() : 1;
 		int loanPanelHeight = 25 * loanRows;
