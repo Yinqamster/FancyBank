@@ -1,5 +1,7 @@
 package Utils;
 
+import java.math.BigDecimal;
+
 public class Config {
 
 	public static final String USER = "User";
@@ -25,6 +27,12 @@ public class Config {
 	public static final int CLOSEACCOUNT = 6;
 	
 	public static final String DEFAULTCURRENCY = "dollar";
+	public static final BigDecimal DEFAULTSERVICECHARGERATE = new BigDecimal("0.01");
+	public static final BigDecimal DEFAULTINTERESTSFORSAVINGACCOUNT = new BigDecimal("0.03");
+	public static final BigDecimal DEFAULTINTERESTFORLOAN = new BigDecimal("0.1");
+	public static final BigDecimal DEFAULTBALANCEFORINTEREST = new BigDecimal("500");
+	public static final BigDecimal DEFAULTOPENACCOUNTFEE = new BigDecimal("10");
+	public static final BigDecimal DEFAULTCLOSEACCOUNTFEE = new BigDecimal("50");
 	
 	public static final int ACCOUNTNUMBERLENGTH = 12;
 	public static final int TRANSACTIONIDLENGTH = 10;

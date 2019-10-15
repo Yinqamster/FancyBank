@@ -26,7 +26,16 @@ public class Bank{
 	private List<String> transactionIdList = new ArrayList<String>();
 	
 	public Bank(){
+		balance = new BigDecimal("0");
+		openAccountFee = Config.DEFAULTOPENACCOUNTFEE;
+		closeAccountFee = Config.DEFAULTCLOSEACCOUNTFEE;
 		
+		CurrencyConfig currencyConfig  = new CurrencyConfig(
+				Config.DEFAULTSERVICECHARGERATE,
+				Config.DEFAULTINTERESTFORLOAN,
+				Config.DEFAULTINTERESTSFORSAVINGACCOUNT,
+				Config.DEFAULTBALANCEFORINTEREST);
+		currencyList.put(Config.DEFAULTCURRENCY, new Currency(Config.DEFAULTCURRENCY, currencyConfig));
 	}
 	
 	public String getPassword() {
