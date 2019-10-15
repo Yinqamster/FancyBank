@@ -1,5 +1,6 @@
 package Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -72,27 +73,27 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
-	public static int checkBirthday(String birthday) {
-		if(birthday.isEmpty() || birthday == null) {
-			return ErrCode.MISSBIRTHDAY;
+	public static int checkDate(String dateStr) {
+		if(dateStr.isEmpty() || dateStr == null) {
+			return ErrCode.MISSDATE;
 		}
-		String[] date = birthday.split("/");
+		String[] date = dateStr.split("/");
 		if(date.length != 3) {
-			return ErrCode.WRONGBIRTHDAYFORMAT;
+			return ErrCode.WRONGDATEFORMAT;
 		}
 		String month = date[0];
 		String day = date[1];
 		String year = date[2];
 		if(!isNumber(year)) {
-			return ErrCode.WRONGDOBYEAR;
+			return ErrCode.WRONGDATEYEAR;
 		}
 		if(!isNumber(month) || 
 				!(Integer.valueOf(month).compareTo(1)>=0 
 				&& Integer.valueOf(month).compareTo(12)<=0)) {
-			return ErrCode.WRONGDOBMONTH;
+			return ErrCode.WRONGDATEMONTH;
 		}
 		if(!isNumber(day)) {
-			return ErrCode.WRONGDOBDAY;
+			return ErrCode.WRONGDATEDAY;
 		}
 		int d = Integer.valueOf(day);
 		int y = Integer.valueOf(year);
@@ -100,23 +101,23 @@ public class UtilFunction {
 		
 		if(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12){
 			if(!(d >= 1 && d <= 31)) {
-				return ErrCode.WRONGDOBDAY;
+				return ErrCode.WRONGDATEDAY;
 			}
 		}
 		else if(m == 4 || m == 6 || m == 9 || m == 11) {
 			if(!(d >= 1 && d <= 30)) {
-				return ErrCode.WRONGDOBDAY;
+				return ErrCode.WRONGDATEDAY;
 			}
 		}
 		else if(m == 2) {
 			if((y % 4 == 0 && y % 100 != 0) || y % 400 == 0) {
 				if(!(d >= 1 && d <= 29)) {
-					return ErrCode.WRONGDOBDAY;
+					return ErrCode.WRONGDATEDAY;
 				}
 			}
 			else {
 				if(!(d >= 1 && d <= 28)) {
-					return ErrCode.WRONGDOBDAY;
+					return ErrCode.WRONGDATEDAY;
 				}
 			}
 		}
@@ -197,7 +198,14 @@ public class UtilFunction {
 	    BankController.getBank().getTransactionIdList().add(resStr);
 	    return resStr;
 	}
-	
+	public static int calculateTimeDifference(Date beginDate, Date endDate) {
+	    java.util.Date fromDate = new java.util.Date(beginDate.getYear(), beginDate.getMonth(), beginDate.getDay());
+	    java.util.Date toDate = new java.util.Date(endDate.getYear(), endDate.getMonth(), endDate.getDay());
+	    long from1 = fromDate.getTime();  
+	    long to1 = toDate.getTime();  
+	    int days = (int) ((to1 - from1) / (1000 * 60 * 60 * 24));  
+	    return days;
+	}
 	
 	
 }

@@ -2,6 +2,7 @@ package controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+//import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import Utils.UtilFunction;
 import model.Account;
 import model.Bank;
 import model.CurrencyConfig;
+import model.Date;
 import model.Loan;
 import model.Name;
 import model.Transaction;
@@ -45,8 +47,8 @@ public class UserController implements BankATMInterface{
 		if(UtilFunction.checkEmail(email) != ErrCode.OK) {
 			return UtilFunction.checkEmail(email);
 		}
-		if(UtilFunction.checkBirthday(birthday) != ErrCode.OK) {
-			return UtilFunction.checkBirthday(birthday);
+		if(UtilFunction.checkDate(birthday) != ErrCode.OK) {
+			return UtilFunction.checkDate(birthday);
 		}
 		if(UtilFunction.checkPassword(password, cPassword) != ErrCode.OK) {
 			return UtilFunction.checkPassword(password, cPassword);
@@ -285,7 +287,69 @@ public class UserController implements BankATMInterface{
 		return name;
 	}
 	
-	public List<Loan> getLoanList(String username) {
+	public Map<String, Loan> getLoanList(String username) {
 		return bank.getUserList().get(username).getLoanList();
+	}
+	
+	public int takeLoan(String username, String name, String collateral, String currency, BigDecimal number, String dueDate) {
+		User user = bank.getUserList().get(username);
+		
+		if(name.isEmpty() || name == null) {
+			return ErrCode.LOANNAMEEMPTY;
+		}
+		if(user.getLoanList().containsKey(name)) {
+			return ErrCode.LOANNAMEEXIST;
+		}
+		if(collateral.isEmpty() || collateral == null) {
+			return ErrCode.COLLATERALEMPTY;
+		}
+		if(number.equals(BigDecimal.ZERO) || number == null) {
+			return ErrCode.LOANNUMBEREMPTY;
+		}
+		if(UtilFunction.checkDate(dueDate) != ErrCode.OK) {
+			return UtilFunction.checkDate(dueDate);
+		}
+		
+		Date startDate = UtilFunction.now();
+		Date endDate = UtilFunction.stringToDate(dueDate);
+		Loan loan = new Loan(name, collateral, currency, number, startDate, endDate, Config.PROCESSING);
+		user.addLoan(loan);
+		bank.addUser(username, user);
+		
+		return ErrCode.OK;
+	}
+	
+	public int payForLoan(String username, String loanName, String accountNumber) {
+		User user = bank.getUserList().get(username);
+		if(loanName.isEmpty() || loanName == null) {
+			return ErrCode.LOANNAMEEMPTY;
+		}
+		if(!user.getLoanList().containsKey(loanName)) {
+			return ErrCode.LOANNAMENOTEXIST;
+		}
+		if(user.getLoanList().get(loanName).getStatus() == Config.PAIED 
+				|| user.getLoanList().get(loanName).getStatus() == Config.PROCESSING) {
+			return ErrCode.LOANCANNOTBEPAIED;
+		}
+		Loan loan = user.getLoanList().get(loanName);
+		if(!user.getAccounts().containsKey(accountNumber)) {
+			return ErrCode.NOSUCHACCOUNT;
+		}
+		int days = UtilFunction.calculateTimeDifference(loan.getStartDate(), loan.getDueDate());
+		BigDecimal interestRate = bank.getCurrencyList().get(loan.getCurrency()).getCurrencyConfig().getInterestsForLoan();
+		BigDecimal interestsForLoan = loan.getNumber().multiply(interestRate).multiply(new BigDecimal(String.valueOf(days))).divide(new BigDecimal("365"));
+		BigDecimal oldBalance = user.getAccounts().get(accountNumber).getBalance().get(loan.getCurrency());
+		if(!user.getAccounts().get(accountNumber).getBalance().containsKey(loan.getCurrency())
+				|| oldBalance.compareTo(loan.getNumber().add(interestsForLoan))<0) {
+			return ErrCode.NOENOUGHMONEY;
+		}
+		BigDecimal newBalance = oldBalance.subtract(loan.getNumber()).subtract(interestsForLoan);
+		user.getAccounts().get(accountNumber).getBalance().put(loan.getCurrency(), newBalance);
+		Transaction transaction = new Transaction(loan.getNumber(), interestsForLoan, newBalance, UtilFunction.now(), null, Config.PAYFORLOAN);
+		user.getAccounts().get(accountNumber).addTransactionDetails(transaction);
+		bank.setBalance(bank.getBalance().add(interestsForLoan));
+		loan.setStatus(Config.PAIED);
+		user.getLoanList().put(loanName, loan);
+		return ErrCode.OK;
 	}
 }

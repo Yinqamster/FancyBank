@@ -1,12 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import Utils.Config;
-import Utils.UtilFunction;
 import controller.BankController;
 
 public class User extends Person{
@@ -18,7 +14,7 @@ public class User extends Person{
 	
 	private Map<String, Account> accounts;
 	
-	private List<Loan> loanList;
+	private Map<String, Loan> loanList;
 	
 	public User(){
 		
@@ -30,7 +26,7 @@ public class User extends Person{
 		super.setID(id);
 		this.password = password;
 		accounts = new HashMap<String, Account>();
-		loanList = new ArrayList<Loan>();
+		loanList = new HashMap<String, Loan>();
 	}
 	
 	public int getMaxID(){
@@ -66,12 +62,12 @@ public class User extends Person{
 		this.accounts.put(accountNumber, account);
 	}
 	
-	public List<Loan> getLoanList() {
+	public Map<String, Loan> getLoanList() {
 		return this.loanList;
 	}
 	
 	public void addLoan(Loan loan) {
-		this.loanList.add(loan);
+		this.loanList.put(loan.getName(), loan);
 	}
 	
 	public void print() {
