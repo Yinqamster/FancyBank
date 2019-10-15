@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,9 +60,18 @@ public class ChooseIdentity extends JFrame{
 
 		
 		getContentPane().add(panel);
+		
+		
+		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+		int totalWidth = 500;
+		int totalHeight = panel.getY() + panel.getHeight() + 50;
+		totalHeight = totalHeight > 500 ? totalHeight : 500;
+		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
+		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
+		
 		this.setTitle( "Bank ATM" );
-		this.setSize(500, 500);
-		this.setLocation(500, 500); 
+		this.setSize(totalWidth, totalHeight);
+		this.setLocation(locationX, locationY); 
 		this.setResizable(false);
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE); 
 		this.setVisible( true );

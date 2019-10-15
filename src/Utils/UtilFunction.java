@@ -1,25 +1,21 @@
 package Utils;
 
 import java.util.Calendar;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.BankController;
 import model.Date;
-import model.Manager;
+import model.Bank;
 import model.Name;
 import model.User;
 
 public class UtilFunction {
 
 	public static void printUsers() {
-		for(User user : Config.userList.values()) {
+		for(User user : BankController.getBank().getUserList().values()) {
 			user.print();
-		}
-	}
-	
-	public static void printManagers() {
-		for(Manager manager : Config.managerList.values()) {
-			manager.print();
 		}
 	}
 	
@@ -28,10 +24,10 @@ public class UtilFunction {
 		if(username.isEmpty() || username == null) {
 			return ErrCode.MISSUSERNAME;
 		}
-		if(identity == Config.USER && !Config.userList.containsKey(username)) {
+		if(identity == Config.USER && !BankController.getBank().getUserList().containsKey(username)) {
 			return ErrCode.USERNAMENOTEXISTS;
 		}
-		if(identity == Config.MANAGER && !Config.managerList.containsKey(username)) {
+		if(identity == Config.MANAGER && !username.equals(Config.MANAGERUSERNAME)) {
 			return ErrCode.USERNAMENOTEXISTS;
 		}
 		return ErrCode.OK;
@@ -48,10 +44,7 @@ public class UtilFunction {
 		if(name.getNickName().isEmpty() || name.getNickName() == null) {
 			return ErrCode.MISSUSERNAME;
 		}
-		if(identity == Config.USER && Config.userList.containsKey(name.getNickName())) {
-			return ErrCode.USERNAMEEXISTS;
-		}
-		if(identity == Config.MANAGER && Config.managerList.containsKey(name.getNickName())) {
+		if(identity == Config.USER && BankController.getBank().getUserList().containsKey(name.getNickName())) {
 			return ErrCode.USERNAMEEXISTS;
 		}
 		return ErrCode.OK;
@@ -175,6 +168,34 @@ public class UtilFunction {
 		int minute = calendar.get(Calendar.MINUTE);
 		int second = calendar.get(Calendar.SECOND);
 		return new Date(month, day, year, hour, minute, second);
+	}
+	
+	public static String generateAccountNumber() {
+		String number = String.valueOf((int)Math.random()*Config.ACCOUNTNUMBERLENGTH);
+		while(BankController.getBank().getAccountList().containsKey(number)) {
+			number = String.valueOf((int)Math.random()*Config.ACCOUNTNUMBERLENGTH);
+		}
+		return number;
+	}
+	
+	public static String generateTransactionID() {
+		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    Random random=new Random();
+	    StringBuffer sb=new StringBuffer();
+	    for(int i=0;i<Config.TRANSACTIONIDLENGTH;i++){
+	    	int number=random.nextInt(62);
+	    	sb.append(str.charAt(number));
+	    }
+	    String resStr =  sb.toString();
+	    while(BankController.getBank().getTransactionIdList().contains(resStr)) {
+	    	for(int i=0;i<Config.TRANSACTIONIDLENGTH;i++){
+		    	int number=random.nextInt(62);
+		    	sb.append(str.charAt(number));
+		    }
+		    resStr =  sb.toString();
+	    }
+	    BankController.getBank().getTransactionIdList().add(resStr);
+	    return resStr;
 	}
 	
 	

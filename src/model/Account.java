@@ -7,7 +7,7 @@ import java.util.Map;
 public class Account {
 
 	private int accountType;
-	private int accountNumber;
+	private String accountNumber;
 	private Map<String, BigDecimal> balance;
 	private List<Transaction> transactionDetails;
 	
@@ -19,11 +19,11 @@ public class Account {
 		this.accountType = accountType;
 	}
 	
-	public int getAccountNumber() {
+	public String getAccountNumber() {
 		return this.accountNumber;
 	}
 	
-	public void setAccountNumber(int accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	

@@ -2,6 +2,8 @@ package model;
 
 import java.math.BigDecimal;
 
+import Utils.UtilFunction;
+
 public class Transaction {
 	private int fromAccountNumber;
 	private int toAccountNumber;
@@ -11,26 +13,30 @@ public class Transaction {
 	private String transactionID;
 	private String remarks;
 	private int transactionType;
+	private BigDecimal serviceCharge;
+	private BigDecimal balance;
 	
 	public Transaction() {
-		
+		this.transactionID = UtilFunction.generateTransactionID();
 	}
 	
-	public Transaction(BigDecimal num, Date date, String remarks, int transactionType) {
+	public Transaction(BigDecimal num, BigDecimal serviceCharge, BigDecimal balance,
+			Date date, String remarks, int transactionType) {
+		this();
 		this.num = num;
+		this.serviceCharge = serviceCharge;
+		this.balance = balance;
 		this.date = date;
 		this.remarks = remarks;
 		this.transactionType = transactionType;
-		//TODO generate transactionID
-//		this.transactionID = 
+		
 	}
 	
-	public Transaction(BigDecimal num, Date date, String remarks, int transactionType, int from, int to) {
-		this(num, date, remarks, transactionType);
+	public Transaction(BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
+			Date date, String remarks, int transactionType, int from, int to) {
+		this(num, serviceCharge, balance, date, remarks, transactionType);
 		this.fromAccountNumber = from;
 		this.toAccountNumber = to;
-		//TODO generate transactionID
-//		this.transactionID = 
 	}
 	
 	public int getFromAccountNumber() {

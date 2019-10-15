@@ -1,31 +1,36 @@
 package Utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import model.Currency;
-import model.Manager;
-import model.User;
-
 public class Config {
 
 	public static final String USER = "User";
 	public static final String MANAGER = "Manager";
+	
+	public static final String MANAGERUSERNAME = "Admin";
+	public static final String MANAGERPASSWORD = "Admin";
+	
+	//account type
+	public static final int CHECKINGACCOUNT = 1;
+	public static final int SAVINGACCOUNT = 2;
 	
 	//log status
 	public static final int NOTLOGGEDIN = 0;
 	public static final int LOGGEDIN = 1;
 	
 	//transaction status
-	public static final int CASHIN = 1;
-	public static final int CASHOUT = 2;
-	public static final int TRANSFER = 3;
+	public static final int DEPOSIT = 1;
+	public static final int WITHDRAW = 2;
+	public static final int TRANSFEROUT = 3;
+	public static final int RECEIVE = 4;
+	public static final int OPENACCOUNT = 5;
+	public static final int CLOSEACCOUNT = 6;
 	
-	//userId, user
-	public static Map<String, User> userList = new HashMap<String, User>();
-	//managerId, manager
-	public static Map<String, Manager> managerList = new HashMap<String, Manager>();
-	//currency name, currrency
-	public static Map<String, Currency> currencyList = new HashMap<String, Currency>();
+	public static final String DEFAULTCURRENCY = "dollar";
+	
+	public static final int ACCOUNTNUMBERLENGTH = 12;
+	public static final int TRANSACTIONIDLENGTH = 10;
+	
+	
+	
+	
 	
 }

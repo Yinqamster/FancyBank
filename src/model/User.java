@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Utils.Config;
 import Utils.UtilFunction;
+import controller.BankController;
 
 public class User extends Person{
 
@@ -13,7 +16,9 @@ public class User extends Person{
 	
 //	private int userID;
 	
-	private Map<Integer, Account> accounts;
+	private Map<String, Account> accounts;
+	
+	private List<Loan> loanList;
 	
 	public User(){
 		
@@ -24,15 +29,16 @@ public class User extends Person{
 		int id = getMaxID() + 1;
 		super.setID(id);
 		this.password = password;
-		accounts = new HashMap<Integer, Account>();
+		accounts = new HashMap<String, Account>();
+		loanList = new ArrayList<Loan>();
 	}
 	
 	public int getMaxID(){
 		int maxId = 0;
-		if(Config.userList.isEmpty()) {
+		if(BankController.getBank().getUserList().isEmpty()) {
 			return 0;
 		}
-		for(User u : Config.userList.values()) {
+		for(User u : BankController.getBank().getUserList().values()) {
 			if(u.getID() > maxId){
 				maxId = u.getID();
 			}
@@ -52,8 +58,20 @@ public class User extends Person{
 		this.status = status;
 	}
 	
-	public Map<Integer, Account> getAccounts() {
+	public Map<String, Account> getAccounts() {
 		return this.accounts;
+	}
+	
+	public void addAccount(String accountNumber, Account account) {
+		this.accounts.put(accountNumber, account);
+	}
+	
+	public List<Loan> getLoanList() {
+		return this.loanList;
+	}
+	
+	public void addLoan(Loan loan) {
+		this.loanList.add(loan);
 	}
 	
 	public void print() {

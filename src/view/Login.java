@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,13 +19,13 @@ import javax.swing.SwingConstants;
 
 import Utils.Config;
 import Utils.ErrCode;
-import controller.ManagerController;
+import controller.BankController;
 import controller.UserController;
 
 public class Login extends JFrame{
 	
 	public UserController userController = UserController.getInstance();
-	public ManagerController managerController = ManagerController.getInstance();
+	public BankController managerController = BankController.getInstance();
 
 	public Login(String identity) {
 		
@@ -31,8 +33,8 @@ public class Login extends JFrame{
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(50, 200, 400, 175);
-		panel.setLayout(new GridLayout(3, 2, 20, 15));
+		panel.setBounds(50, 200, 400, 100);
+		panel.setLayout(new GridLayout(2, 2, 20, 15));
 		
 		JLabel background = new JLabel();
 		ImageIcon bg=new ImageIcon("./src/login_background.png");
@@ -54,23 +56,29 @@ public class Login extends JFrame{
 		username.setHorizontalAlignment(SwingConstants.RIGHT);
 		username.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JTextField uname = new JTextField(10);
+		panel.add(username);
+		panel.add(uname);
 		
 		JLabel password = new JLabel("Password:");
 		password.setHorizontalAlignment(SwingConstants.RIGHT);
 		password.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JPasswordField pwd = new JPasswordField(10);
-
-		JButton register = new JButton("Register");
-		register.setFont(new Font("Helvetica",Font.PLAIN,15));
-		JButton login = new JButton("Login");
-		login.setFont(new Font("Helvetica",Font.PLAIN,15));
-
-		panel.add(username);
-		panel.add(uname);
 		panel.add(password);
 		panel.add(pwd);
-		panel.add(register);
-		panel.add(login);
+		
+		JButton login = new JButton("Login");
+		login.setSize(200, 40);
+		login.setLocation(150, 330);
+		login.setFont(new Font("Helvetica",Font.PLAIN,15));
+		contentPanel.add(login);
+		
+		JButton register = new JButton("Register");
+		register.setFont(new Font("Helvetica",Font.PLAIN,15));
+		register.setSize(200, 40);
+		register.setLocation(150, 390);
+		if(identity == Config.USER) {
+			contentPanel.add(register);
+		}
 		
 		contentPanel.add(back);
 		contentPanel.add(titlePanel);
@@ -78,10 +86,20 @@ public class Login extends JFrame{
 		contentPanel.add(background);
 		
 		getContentPane().add(contentPanel);
+		
+		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+		int totalWidth = 500;
+		int totalHeight = contentPanel.getY() + contentPanel.getHeight() + 50;
+		totalHeight = totalHeight > 500 ? totalHeight : 500;
+		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
+		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
+		
+		
+		
 		this.setTitle( "Bank ATM Login" );
 		this.setResizable(false);
-		this.setSize(500, 500);
-		this.setLocation(500, 500); 
+		this.setSize(totalWidth, totalHeight);
+		this.setLocation(locationX, locationY); 
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE); 
 		this.setVisible( true );
 		

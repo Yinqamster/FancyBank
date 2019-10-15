@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,15 +20,16 @@ import javax.swing.SwingConstants;
 
 import Utils.Config;
 import Utils.ErrCode;
-import controller.ManagerController;
+import controller.BankController;
 import controller.UserController;
 
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 public class Register extends JFrame {
 	
 	public UserController userController = UserController.getInstance();
-	public ManagerController managerController = ManagerController.getInstance();
+	public BankController managerController = BankController.getInstance();
 
 	public Register(String identity) {
 		JPanel contentPanel = new JPanel();
@@ -134,10 +136,18 @@ public class Register extends JFrame {
 		contentPanel.add(background);
 		
 		this.add(contentPanel);
+		
+		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+		int totalWidth = 500;
+		int totalHeight = panel.getY() + panel.getHeight() + 50;
+		totalHeight = totalHeight > 500 ? totalHeight : 500;
+		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
+		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
+		
 		this.setTitle( "Bank ATM Register" );
 		this.setResizable(false);
-		this.setSize(500, 750);
-		this.setLocation(500, 200); 
+		this.setSize(totalWidth, totalHeight);
+		this.setLocation(locationX, locationY); 
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE); 
 		this.setVisible( true );
 		
@@ -157,9 +167,9 @@ public class Register extends JFrame {
 					res = userController.register(name, phoneNum, email, birthday, password, cPassword);
 					
 				}
-				else if(identity == Config.MANAGER) {
-					res = managerController.register(name, phoneNum, email, birthday, password, cPassword);
-				}
+//				else if(identity == Config.MANAGER) {
+//					res = managerController.register(name, phoneNum, email, birthday, password, cPassword);
+//				}
 				
 				if(res == ErrCode.OK) {
 					Object[] options = {"OK"};

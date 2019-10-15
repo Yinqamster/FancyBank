@@ -32,4 +32,5 @@ public class ErrCode {
 	public static int NOENOUGHMONEY = 201;
 	
 	public static int NOSUCHCURRENCY = 301;
+	public static int NOSUCHACCOUNT = 302;
 }

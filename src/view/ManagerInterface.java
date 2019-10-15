@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,13 +14,13 @@ import javax.swing.JPanel;
 
 import Utils.Config;
 import Utils.ErrCode;
-import controller.ManagerController;
+import controller.BankController;
 
 import javax.swing.JButton;
 
 public class ManagerInterface extends JFrame{
 	
-	ManagerController managerController = ManagerController.getInstance();
+	BankController managerController = BankController.getInstance();
 
 	public ManagerInterface(String username){
 		JPanel panel = new JPanel();
@@ -38,7 +40,7 @@ public class ManagerInterface extends JFrame{
 		JLabel background = new JLabel();
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
-		panel.add(background);
+		
 
 		JPanel titlePanel = new JPanel();
 		JLabel title = new JLabel("Manager   System");
@@ -66,13 +68,23 @@ public class ManagerInterface extends JFrame{
 		
 		panel.add(titlePanel);
 		panel.add(operationPanel);
+		panel.add(background);
 		
 		
 		getContentPane().add(panel);
+		
+		
+		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+		int totalWidth = 500;
+		int totalHeight = operationPanel.getY() + operationPanel.getHeight() + 50;
+		totalHeight = totalHeight > 500 ? totalHeight : 500;
+		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
+		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
+		
 		this.setTitle( "Bank ATM Manager System" );
 		this.setResizable(false);
-		this.setSize(500, 500);
-		this.setLocation(500, 500); 
+		this.setSize(totalWidth, totalHeight);
+		this.setLocation(locationX, locationY); 
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE); 
 		this.setVisible( true );
 		
