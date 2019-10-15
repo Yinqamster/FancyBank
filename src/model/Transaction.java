@@ -2,6 +2,9 @@ package model;
 
 import java.math.BigDecimal;
 
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
+
+import Utils.Config;
 import Utils.UtilFunction;
 
 public class Transaction {
@@ -37,6 +40,35 @@ public class Transaction {
 		this(num, serviceCharge, balance, date, remarks, transactionType);
 		this.fromAccountNumber = from;
 		this.toAccountNumber = to;
+	}
+	
+	public int getTransactionType(){
+		return this.transactionType;
+	}
+	
+	public String getTransactionTypeStr(){
+		switch (this.transactionType) {
+			case Config.DEPOSIT:
+				return "Deposit";
+			case Config.WITHDRAW:
+				return "Withdraw";
+			case Config.TRANSFEROUT:
+				return "Transfer Out";
+			case Config.RECEIVE:
+				return "Receive";
+			case Config.OPENACCOUNT:
+				return "Open Account";
+			case Config.CLOSEACCOUNT:
+				return "Close Account";
+			case Config.PAYFORLOAN:
+				return "Pay For Loan";
+			default:
+				return "";
+		}
+	}
+	
+	public String getTransactionId() {
+		return this.transactionID;
 	}
 	
 	public int getFromAccountNumber() {

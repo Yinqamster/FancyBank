@@ -100,6 +100,15 @@ public class UserController implements BankATMInterface{
 		return accountList;
 	}
 	
+//	public List<String> getAccountList(String username) {
+//		List<String> accountList = new ArrayList<String>();
+//		User user = bank.getUserList().get(username);
+//		for(Account a: user.getAccounts().values()){
+//			accountList.add(a.getAccountNumber());
+//		}
+//		return accountList;
+//	}
+	
 	public Account getAccountDetail(String username, String accountNumber) {
 		User user = bank.getUserList().get(username);
 		Account account = user.getAccounts().get(accountNumber);

@@ -298,6 +298,8 @@ public class UserInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				UserInterface.this.dispose();
+				new AccountDetail(username);
 				
 			}
 		});
