@@ -52,6 +52,14 @@ public class Bank{
 		this.balance = balance;
 	}
 	
+	public void setOpenAccountFee(BigDecimal open) {
+		this.openAccountFee = open;
+	}
+	
+	public void setCloseAccountFee(BigDecimal close) {
+		this.closeAccountFee = close;
+	}
+	
 	public Map<String, User> getUserList() {
 		return this.userList;
 	}

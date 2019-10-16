@@ -54,10 +54,10 @@ public class ManagerInterface extends JFrame{
 		operationPanel.setSize(200, 200);
 		operationPanel.setLocation(150, 200);
 		
-		JButton balance = new JButton("Check Balance");
-		balance.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		balance.setIcon(new ImageIcon("./src/balance.png"));
-		operationPanel.add(balance);
+		JButton checkBalance = new JButton("Check Balance");
+		checkBalance.setFont(new Font("Helvetica", Font.PLAIN, 15));
+		checkBalance.setIcon(new ImageIcon("./src/balance.png"));
+		operationPanel.add(checkBalance);
 		JButton checkCustomer = new JButton("Check Customer");
 		checkCustomer.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		checkCustomer.setIcon(new ImageIcon("./src/user.png"));
@@ -119,6 +119,16 @@ public class ManagerInterface extends JFrame{
 			}
 		});
 		
+		checkBalance.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ManagerInterface.this.dispose();
+				new CheckBalance();
+			}
+		});
+		
 		checkCustomer.addActionListener(new ActionListener() {
 			
 			@Override
@@ -142,7 +152,8 @@ public class ManagerInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				ManagerInterface.this.dispose();
+				new SetConfig();
 			}
 		});
 	}

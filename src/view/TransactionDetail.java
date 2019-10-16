@@ -31,7 +31,7 @@ public class TransactionDetail extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(40, 180, 400, 500);
-		panel.setLayout(new GridLayout(9, 2, 10, 15));
+		panel.setLayout(new GridLayout(10, 2, 10, 15));
 		
 		JLabel background = new JLabel();
 		ImageIcon bg=new ImageIcon("./src/login_background.png");
@@ -113,6 +113,15 @@ public class TransactionDetail extends JFrame{
 			fac.setText(t.getFromAccountNumber());
 			panel.add(fac);
 		}
+		
+		JLabel currency = new JLabel("Currency:");
+		currency.setHorizontalAlignment(SwingConstants.RIGHT);
+		currency.setFont(new Font("Helvetica",Font.PLAIN,15));
+		panel.add(currency);
+		JLabel cur = new JLabel(t.getCurrency());
+		cur.setHorizontalAlignment(SwingConstants.LEFT);
+		cur.setFont(new Font("Helvetica",Font.PLAIN,15));
+		panel.add(cur);
 		
 		JLabel amount = new JLabel("Amount:");
 		amount.setHorizontalAlignment(SwingConstants.RIGHT);

@@ -40,4 +40,8 @@ public class ErrCode {
 	public static int COLLATERALEMPTY = 302;
 	public static int LOANNUMBEREMPTY = 303;
 	public static int LOANCANNOTBEPAIED = 304;
+	
+	//set config
+	public static int CURRENCYISNULL = 401;
+	public static int INPUTNOTANUMBER = 402;
 }

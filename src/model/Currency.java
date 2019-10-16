@@ -1,12 +1,14 @@
 package model;
 
+import utils.Config;
+
 public class Currency {
 
 	private String currencyName;
+	private int status;
 	private CurrencyConfig config;
 	
 	public Currency(){
-		
 	}
 	
 	public Currency(String name) {
@@ -18,7 +20,23 @@ public class Currency {
 		this.config = currencyConfig;
 	}
 	
-	public CurrencyConfig getCurrencyConfig() {
+	public  String getCurrencyName() {
+		return this.currencyName;
+	}
+	
+	public int getStatus() {
+		return this.status;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	public CurrencyConfig getConfig() {
 		return this.config;
+	}
+	
+	public void setConfig(CurrencyConfig config) {
+		this.config = config;
 	}
 }

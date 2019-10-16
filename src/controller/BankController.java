@@ -10,6 +10,8 @@ import java.util.TimerTask;
 import model.Account;
 //import model.Date;
 import model.Bank;
+import model.Currency;
+import model.CurrencyConfig;
 import model.Name;
 import model.User;
 import utils.Config;
@@ -40,7 +42,7 @@ public class BankController implements BankATMInterface{
 		return bank;
 	}
 	
-	public static Bank createBank() {
+	public static Bank initBank() {
 		if(bank == null) {
 			bank = new Bank();
 		}
@@ -83,6 +85,10 @@ public class BankController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
+	public Map<String, BigDecimal> getBalance() {
+		return bank.getBalance();
+	}
+	
 	public int getDailyReport() {
 		
 		return ErrCode.OK;
@@ -93,6 +99,62 @@ public class BankController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
+	
+	
+	//set configuration
+	public int setCurrencyStatus(String currency, int status) {
+		if(bank.getCurrencyList().containsKey(currency)) {
+			bank.getCurrencyList().get(currency).setStatus(status);
+		}
+		return ErrCode.OK;
+	}
+	
+	public int editCurrency(String currency, String scRate, String ifsAcc, String ifLoan, String bfInterest) {
+		if(currency.isEmpty() || currency == null) {
+			return ErrCode.CURRENCYISNULL;
+		}
+		if(!UtilFunction.isNumber(scRate) || !UtilFunction.isNumber(ifsAcc) || !UtilFunction.isNumber(ifLoan) || !UtilFunction.isNumber(bfInterest)){
+			return ErrCode.INPUTNOTANUMBER;
+		}
+		Currency c;
+		CurrencyConfig config = new CurrencyConfig(new BigDecimal(scRate), new BigDecimal(ifsAcc),
+				new BigDecimal(ifLoan), new BigDecimal(bfInterest));
+		if(bank.getCurrencyList().containsKey(currency)){
+			c = bank.getCurrencyList().get(currency);
+		}
+		else {
+			c = new Currency();
+		}
+		c.setConfig(config);
+		bank.getCurrencyList().put(currency, c);
+		bank.getBalance().put(currency, new BigDecimal("0"));
+		return ErrCode.OK;
+	}
+	
+	public int deleteCurrency(String currency) {
+		if(bank.getCurrencyList().containsKey(currency)) {
+			bank.getCurrencyList().remove(currency);
+		}
+		return ErrCode.OK;
+	}
+	
+	public int saveConfig(String open, String close) {
+		if(!UtilFunction.isNumber(open) || !UtilFunction.isNumber(close)) {
+			return ErrCode.INPUTNOTANUMBER;
+		}
+		bank.setOpenAccountFee(new BigDecimal(open));
+		bank.setCloseAccountFee(new BigDecimal(close));
+		return ErrCode.OK;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//hand interests for saving accounts
 	public static void handInterest() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 12);
@@ -112,9 +174,9 @@ public class BankController implements BankATMInterface{
 		                		if(account.getAccountType() == Config.SAVINGACCOUNT) {
 		                			Map<String, BigDecimal> balanceList = account.getBalance();
 		                			for(Map.Entry<String, BigDecimal> balance: balanceList.entrySet()) {
-		                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getBalanceForInterest();
+		                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getConfig().getBalanceForInterest();
 		                				if(balance.getValue().compareTo(balanceForInterest) >= 0) {
-		                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getInterestsForSavingAccount();
+		                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getConfig().getInterestsForSavingAccount();
 		                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"));
 		                					balance.setValue(balance.getValue().add(interests));
 		                				}

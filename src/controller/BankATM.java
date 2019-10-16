@@ -8,7 +8,7 @@ public class BankATM {
 
 	public static void main(String args[]) {
 //		JFrame frame = new JFrame("Bank ATM");
-		BankController.createBank();
+		BankController.initBank();
 		ChooseIdentity cr = new ChooseIdentity();
 //		frame.setTitle("Online Dictionary");
 //		frame.setSize(500, 300);

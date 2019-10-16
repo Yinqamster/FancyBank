@@ -18,14 +18,16 @@ public class Transaction {
 	private int transactionType;
 	private BigDecimal serviceCharge;
 	private BigDecimal balance;
+	private String currency;
 	
 	public Transaction() {
 		this.transactionID = UtilFunction.generateTransactionID();
 	}
 	
-	public Transaction(BigDecimal num, BigDecimal serviceCharge, BigDecimal balance,
+	public Transaction(String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance,
 			Date date, String remarks, int transactionType) {
 		this();
+		this.currency = currency;
 		this.num = num;
 		this.serviceCharge = serviceCharge;
 		this.balance = balance;
@@ -35,9 +37,9 @@ public class Transaction {
 		
 	}
 	
-	public Transaction(BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
+	public Transaction(String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
 			Date date, String remarks, int transactionType, String from, String to) {
-		this(num, serviceCharge, balance, date, remarks, transactionType);
+		this(currency, num, serviceCharge, balance, date, remarks, transactionType);
 		this.fromAccountNumber = from;
 		this.toAccountNumber = to;
 	}
@@ -65,6 +67,14 @@ public class Transaction {
 			default:
 				return "";
 		}
+	}
+	
+	public String getCurrency() {
+		return this.currency;
+	}
+	
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	
 	public String getTransactionId() {

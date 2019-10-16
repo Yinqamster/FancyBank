@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import controller.BankController;
 import controller.UserController;
+import model.Currency;
 import model.Loan;
 import utils.Config;
 import utils.ErrCode;
@@ -71,8 +73,12 @@ public class TakeLoan extends JFrame{
 		panel.add(currency);
 		currency.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JComboBox<String> cur = new JComboBox<String>();
-		for(String c : BankController.getBank().getCurrencyList().keySet()) {
-			cur.addItem(c);
+		if(BankController.getBank().getCurrencyList().size() > 0) {
+			for(Map.Entry<String, Currency> c : BankController.getBank().getCurrencyList().entrySet()) {
+//				if(c.getValue().getStatus() == Config.ENABLE){
+					cur.addItem(c.getKey());
+//				}
+			}
 		}
 		panel.add(cur);
 		

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.SwingConstants;
 
 import controller.BankController;
 import controller.UserController;
+import model.Currency;
 import utils.Config;
 import utils.ErrCode;
 
@@ -82,8 +84,12 @@ public class Transact extends JFrame{
 		currency.setHorizontalAlignment(SwingConstants.RIGHT);
 		currency.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JComboBox<String> cur = new JComboBox<String>();
-		for(String c : BankController.getBank().getCurrencyList().keySet()) {
-			cur.addItem(c);
+		if(BankController.getBank().getCurrencyList().size() > 0) {
+			for(Map.Entry<String, Currency> c : BankController.getBank().getCurrencyList().entrySet()) {
+//				if(c.getValue().getStatus() == Config.ENABLE){
+					cur.addItem(c.getKey());
+//				}
+			}
 		}
 		
 		JLabel amount = new JLabel("Amount*: ");
@@ -119,7 +125,7 @@ public class Transact extends JFrame{
 			panel.add(amount);
 			panel.add(num);
 			BigDecimal balan = userController.getAccountDetail(username, toAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-			bal.setText(String.valueOf(balan));
+			bal.setText(String.valueOf(balan == null ? 0 : balan));
 			panel.add(balance);
 			panel.add(bal);
 			panel.add(remarks);
@@ -136,7 +142,7 @@ public class Transact extends JFrame{
 			panel.add(amount);
 			panel.add(num);
 			BigDecimal balan = userController.getAccountDetail(username, fromAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-			bal.setText(String.valueOf(balan));
+			bal.setText(String.valueOf(balan == null ? 0 : balan));
 			panel.add(balance);
 			panel.add(bal);
 			panel.add(remarks);
@@ -156,7 +162,7 @@ public class Transact extends JFrame{
 			panel.add(fromAccount);
 			panel.add(fromAccountList);
 			BigDecimal balan = userController.getAccountDetail(username, fromAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-			bal.setText(String.valueOf(balan));
+			bal.setText(String.valueOf(balan == null ? 0 : balan));
 			panel.add(balance);
 			panel.add(bal);
 			panel.add(remarks);
@@ -193,7 +199,7 @@ public class Transact extends JFrame{
 				// TODO Auto-generated method stub
 				if(transactionType == Config.WITHDRAW || transactionType == Config.TRANSFEROUT) {
 					BigDecimal balan = userController.getAccountDetail(username, fromAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-					bal.setText(String.valueOf(balan));
+					bal.setText(String.valueOf(balan == null ? 0 : balan));
 					panel.revalidate();
 					panel.repaint();
 				}
@@ -207,11 +213,11 @@ public class Transact extends JFrame{
 				// TODO Auto-generated method stub
 				if(transactionType == Config.WITHDRAW || transactionType == Config.TRANSFEROUT) {
 					BigDecimal balan = userController.getAccountDetail(username, fromAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-					bal.setText(String.valueOf(balan));
+					bal.setText(String.valueOf(balan == null ? 0 : balan));
 				}
 				else if(transactionType == Config.DEPOSIT) {
 					BigDecimal balan = userController.getAccountDetail(username, toAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-					bal.setText(String.valueOf(balan));
+					bal.setText(String.valueOf(balan == null ? 0 : balan));
 					
 				}
 				panel.revalidate();
@@ -226,7 +232,7 @@ public class Transact extends JFrame{
 				// TODO Auto-generated method stub
 				if(transactionType == Config.DEPOSIT) {
 					BigDecimal balan = userController.getAccountDetail(username, toAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
-					bal.setText(String.valueOf(balan));
+					bal.setText(String.valueOf(balan == null ? 0 : balan));
 					panel.revalidate();
 					panel.repaint();
 				}

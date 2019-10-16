@@ -7,8 +7,8 @@ public class Config {
 	public static final String USER = "User";
 	public static final String MANAGER = "Manager";
 	
-	public static final String MANAGERUSERNAME = "Admin";
-	public static final String MANAGERPASSWORD = "Admin";
+	public static final String MANAGERUSERNAME = "1";
+	public static final String MANAGERPASSWORD = "1";
 	
 	//account type
 	public static final int CHECKINGACCOUNT = 1;
@@ -46,6 +46,11 @@ public class Config {
 	//number length
 	public static final int ACCOUNTNUMBERLENGTH = 12;
 	public static final int TRANSACTIONIDLENGTH = 10;
+	
+	
+	//currency status
+	public static final int DISABLE = 0;
+	public static final int ENABLE = 1;
 	
 	
 	
