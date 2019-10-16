@@ -14,16 +14,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import controller.BankController;
 import controller.UserController;
 import model.Bank;
 import model.Currency;
-import model.Name;
 import utils.Config;
 import utils.ErrCode;
 import javax.swing.ScrollPaneConstants;

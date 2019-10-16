@@ -1,7 +1,5 @@
 package model;
 
-import utils.Config;
-
 public class Currency {
 
 	private String currencyName;

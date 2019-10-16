@@ -1,6 +1,5 @@
 package utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -8,7 +7,6 @@ import java.util.regex.Pattern;
 
 import controller.BankController;
 import model.Date;
-import model.Bank;
 import model.Name;
 import model.User;
 

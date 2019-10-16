@@ -1,6 +1,5 @@
 package controller;
 
-import model.Date;
 import model.Name;
 
 public interface BankATMInterface {

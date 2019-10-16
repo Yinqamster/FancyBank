@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Account;
-//import model.Date;
 import model.Bank;
 import model.Currency;
 import model.CurrencyConfig;
@@ -80,21 +79,17 @@ public class BankController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
+	public Map<String, BigDecimal> getBalance() {
+		return bank.getBalance();
+	}
+	
 	public int checkCustomer() {
 		
 		return ErrCode.OK;
 	}
 	
-	public Map<String, BigDecimal> getBalance() {
-		return bank.getBalance();
-	}
 	
 	public int getDailyReport() {
-		
-		return ErrCode.OK;
-	}
-	
-	public int setConfig(String currencyName) {
 		
 		return ErrCode.OK;
 	}
