@@ -8,8 +8,8 @@ import Utils.Config;
 import Utils.UtilFunction;
 
 public class Transaction {
-	private int fromAccountNumber;
-	private int toAccountNumber;
+	private String fromAccountNumber;
+	private String toAccountNumber;
 	private BigDecimal num;
 	private Date date;
 	private int status;
@@ -36,7 +36,7 @@ public class Transaction {
 	}
 	
 	public Transaction(BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
-			Date date, String remarks, int transactionType, int from, int to) {
+			Date date, String remarks, int transactionType, String from, String to) {
 		this(num, serviceCharge, balance, date, remarks, transactionType);
 		this.fromAccountNumber = from;
 		this.toAccountNumber = to;
@@ -71,19 +71,35 @@ public class Transaction {
 		return this.transactionID;
 	}
 	
-	public int getFromAccountNumber() {
+	public String getFromAccountNumber() {
 		return this.fromAccountNumber;
 	}
 	
-	public void setFromAccountNumber(int from) {
+	public BigDecimal getServiceCharge() {
+		return this.serviceCharge;
+	}
+	
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+	
+	public Date getDate(){
+		return this.date;
+	}
+	
+	public String getRemarks(){
+		return this.remarks;
+	}
+	
+	public void setFromAccountNumber(String from) {
 		this.fromAccountNumber = from;
 	}
 	
-	public int getToAccountNumber() {
+	public String getToAccountNumber() {
 		return this.toAccountNumber;
 	}
 	
-	public void setToAccountNumber(int to) {
+	public void setToAccountNumber(String to) {
 		this.toAccountNumber = to;
 	}
 	

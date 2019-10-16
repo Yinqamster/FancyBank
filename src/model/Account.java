@@ -11,12 +11,14 @@ public class Account {
 	private int accountType;
 	private String accountNumber;
 	private Map<String, BigDecimal> balance;
-	private List<Transaction> transactionDetails;
+	private Map<String, Transaction> transactionDetails;
 	
 	public Account() {
 		// TODO Auto-generated constructor stub
+		//currency, amount
 		balance = new HashMap<String, BigDecimal>();
-		transactionDetails = new ArrayList<Transaction>();
+		//transaction id, transaction
+		transactionDetails = new HashMap<String, Transaction>();
 	}
 	
 	public int getAccountType(){
@@ -43,11 +45,11 @@ public class Account {
 		this.balance = balance;
 	}
 	
-	public List<Transaction> getTransactionDetails() {
+	public Map<String, Transaction> getTransactionDetails() {
 		return this.transactionDetails;
 	}
 	
 	public void addTransactionDetails(Transaction t) {
-		this.transactionDetails.add(t);
+		this.transactionDetails.put(t.getTransactionId(), t);
 	}
 }

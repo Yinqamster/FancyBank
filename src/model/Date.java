@@ -38,10 +38,14 @@ public class Date {
 	}
 	
 	
-	public String toString() {
+	public String toDayString() {
 		String string = "" + month + "/" + day + "/" + year;
 		return string;
 	}
 	
+	public String toTimeString() {
+		String string = "" + month + "/" + day + "/" + year +" " + hour + ":" + minute + ":" +second;
+		return string;
+	}
 	
 }

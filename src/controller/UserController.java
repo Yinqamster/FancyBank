@@ -147,7 +147,7 @@ public class UserController implements BankATMInterface{
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
 		
-		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.DEPOSIT);
+		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.DEPOSIT, "", accountNumber);
 		account.addTransactionDetails(t);
 		user.getAccounts().put(accountNumber, account);
 		bank.addUser(username, user);
@@ -192,7 +192,7 @@ public class UserController implements BankATMInterface{
 		bank.setBalance(bank.getBalance().add(serviceCharge));
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
-		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), null, Config.WITHDRAW);
+		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.WITHDRAW, accountNumber, "");
 		account.addTransactionDetails(t);
 		user.getAccounts().put(accountNumber, account);
 		bank.addUser(username, user);
@@ -235,7 +235,7 @@ public class UserController implements BankATMInterface{
 		bank.setBalance(bank.getBalance().add(serviceCharge));
 		fromBalanceList.put(currency, newBalance);
 		fromAccount.setBalance(fromBalanceList);
-		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.TRANSFEROUT);
+		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.TRANSFEROUT, fromAccountNumber, toAccountNumber);
 		fromAccount.addTransactionDetails(t);
 		user.getAccounts().put(fromAccountNumber, fromAccount);
 		bank.addUser(username, user);
@@ -250,7 +250,7 @@ public class UserController implements BankATMInterface{
 		BigDecimal toNewBalance = toOldBalance.add(number);
 		toBalanceList.put(currency, toNewBalance);
 		toAccount.setBalance(toBalanceList);
-		Transaction toT = new Transaction(number, BigDecimal.ZERO, toNewBalance, UtilFunction.now(), remarks, Config.RECEIVE);
+		Transaction toT = new Transaction(number, BigDecimal.ZERO, toNewBalance, UtilFunction.now(), remarks, Config.RECEIVE, fromAccountNumber, toAccountNumber);
 		toAccount.addTransactionDetails(toT);
 		toUser.getAccounts().put(toAccountNumber, toAccount);
 		bank.addUser(toUser.getName().getNickName(), toUser);
@@ -283,7 +283,7 @@ public class UserController implements BankATMInterface{
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
 		
-		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), null, Config.OPENACCOUNT);
+		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), null, Config.OPENACCOUNT, "", accountNumber);
 		account.addTransactionDetails(t);
 		user.getAccounts().put(accountNumber, account);
 		bank.addUser(username, user);
@@ -375,7 +375,7 @@ public class UserController implements BankATMInterface{
 		}
 		BigDecimal newBalance = oldBalance.subtract(loan.getNumber()).subtract(interestsForLoan);
 		user.getAccounts().get(accountNumber).getBalance().put(loan.getCurrency(), newBalance);
-		Transaction transaction = new Transaction(loan.getNumber(), interestsForLoan, newBalance, UtilFunction.now(), null, Config.PAYFORLOAN);
+		Transaction transaction = new Transaction(loan.getNumber(), interestsForLoan, newBalance, UtilFunction.now(), null, Config.PAYFORLOAN, accountNumber, "");
 		user.getAccounts().get(accountNumber).addTransactionDetails(transaction);
 		bank.setBalance(bank.getBalance().add(interestsForLoan));
 		loan.setStatus(Config.PAIED);

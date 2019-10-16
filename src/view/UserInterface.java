@@ -211,6 +211,7 @@ public class UserInterface extends JFrame{
 				// TODO Auto-generated method stub
 				int res = userController.logout(username);
 				if(res == ErrCode.OK) {
+					UserInterface.this.dispose();
 					new Login(Config.USER);
 				}
 				else {
@@ -299,7 +300,7 @@ public class UserInterface extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				UserInterface.this.dispose();
-				new AccountDetail(username);
+				new AccountDetail(username, "");
 				
 			}
 		});
