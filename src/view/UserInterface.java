@@ -15,11 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
 import model.Loan;
+import utils.Config;
+import utils.ErrCode;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import Utils.Config;
+import utils.Config;
 
 public class ChooseIdentity extends JFrame{
 

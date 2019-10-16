@@ -23,11 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
 import model.Transaction;
+import utils.Config;
+import utils.ErrCode;
 
 public class AccountDetail extends JFrame{
 	public UserController userController = UserController.getInstance();

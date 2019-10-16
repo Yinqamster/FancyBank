@@ -19,10 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
+import utils.Config;
+import utils.ErrCode;
 
 public class Transact extends JFrame{
 	public UserController userController = UserController.getInstance();

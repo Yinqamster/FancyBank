@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Utils.Config;
+import utils.Config;
 
 
 public class Bank{
 
 	private String username = Config.MANAGERUSERNAME;
 	private String password = Config.MANAGERPASSWORD;
-	private BigDecimal balance;
+	private Map<String, BigDecimal> balance;
 	private BigDecimal closeAccountFee;
 	private BigDecimal openAccountFee;
 	
@@ -26,7 +26,8 @@ public class Bank{
 	private List<String> transactionIdList = new ArrayList<String>();
 	
 	public Bank(){
-		balance = new BigDecimal("0");
+		balance = new HashMap<String, BigDecimal>();
+		balance.put(Config.DEFAULTCURRENCY, new BigDecimal("0"));
 		openAccountFee = Config.DEFAULTOPENACCOUNTFEE;
 		closeAccountFee = Config.DEFAULTCLOSEACCOUNTFEE;
 		
@@ -43,12 +44,12 @@ public class Bank{
 	}
 	
 	
-	public BigDecimal getBalance() {
+	public Map<String, BigDecimal> getBalance() {
 		return this.balance;
 	}
 	
-	public void setBalance(BigDecimal num) {
-		this.balance = num;
+	public void setBalance(Map<String, BigDecimal> balance) {
+		this.balance = balance;
 	}
 	
 	public Map<String, User> getUserList() {

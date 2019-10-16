@@ -7,16 +7,14 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
-
-import Utils.Config;
-import Utils.ErrCode;
-import Utils.UtilFunction;
 import model.Account;
 //import model.Date;
 import model.Bank;
 import model.Name;
 import model.User;
+import utils.Config;
+import utils.ErrCode;
+import utils.UtilFunction;
 
 public class BankController implements BankATMInterface{
 	
@@ -26,7 +24,6 @@ public class BankController implements BankATMInterface{
 	
 	private BankController() {
 		// TODO Auto-generated constructor stub
-		handInterest();
 	}
 	
 	public static BankController getInstance() {  
@@ -40,6 +37,14 @@ public class BankController implements BankATMInterface{
 		if(bank == null) {
 			bank = new Bank();
 		}
+		return bank;
+	}
+	
+	public static Bank createBank() {
+		if(bank == null) {
+			bank = new Bank();
+		}
+		handInterest();
 		return bank;
 	}
 
@@ -88,7 +93,7 @@ public class BankController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
-	public void handInterest() {
+	public static void handInterest() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 12);
         calendar.set(Calendar.MINUTE, 0);
@@ -100,23 +105,27 @@ public class BankController implements BankATMInterface{
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 System.out.println("begin to hand interests");
-                for(User user : bank.getUserList().values()) {
-                	for(Account account: user.getAccounts().values()) {
-                		if(account.getAccountType() == Config.SAVINGACCOUNT) {
-                			Map<String, BigDecimal> balanceList = account.getBalance();
-                			for(Map.Entry<String, BigDecimal> balance: balanceList.entrySet()) {
-                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getBalanceForInterest();
-                				if(balance.getValue().compareTo(balanceForInterest) >= 0) {
-                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getInterestsForSavingAccount();
-                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"));
-                					balance.setValue(balance.getValue().add(interests));
-                				}
-                			}
-                			account.setBalance(balanceList);
-                		}
-                		user.addAccount(account.getAccountNumber(), account);
-                	}
-                	bank.addUser(user.getName().getNickName(), user);
+                if(bank.getUserList().size() > 0) {
+	                for(User user : bank.getUserList().values()) {
+	                	if(user.getAccounts().size() > 0) {
+		                	for(Account account: user.getAccounts().values()) {
+		                		if(account.getAccountType() == Config.SAVINGACCOUNT) {
+		                			Map<String, BigDecimal> balanceList = account.getBalance();
+		                			for(Map.Entry<String, BigDecimal> balance: balanceList.entrySet()) {
+		                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getBalanceForInterest();
+		                				if(balance.getValue().compareTo(balanceForInterest) >= 0) {
+		                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getCurrencyConfig().getInterestsForSavingAccount();
+		                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"));
+		                					balance.setValue(balance.getValue().add(interests));
+		                				}
+		                			}
+		                			account.setBalance(balanceList);
+		                		}
+		                		user.addAccount(account.getAccountNumber(), account);
+		                	}
+		                	bank.addUser(user.getName().getNickName(), user);
+	                	}
+	                }
                 }
             }
         }, time, 1000 * 60 * 60 * 24);//execute per day

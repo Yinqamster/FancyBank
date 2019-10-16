@@ -14,11 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
 import model.Transaction;
+import utils.Config;
+import utils.ErrCode;
 
 public class TransactionDetail extends JFrame{
 

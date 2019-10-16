@@ -17,11 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
 import model.Loan;
+import utils.Config;
+import utils.ErrCode;
+
 import javax.swing.JComboBox;
 
 public class TakeLoan extends JFrame{

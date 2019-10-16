@@ -15,11 +15,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.Name;
+import utils.Config;
+import utils.ErrCode;
 
 import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
 

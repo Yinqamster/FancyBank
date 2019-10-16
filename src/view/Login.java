@@ -17,10 +17,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
 import controller.UserController;
+import utils.Config;
+import utils.ErrCode;
 
 public class Login extends JFrame{
 	

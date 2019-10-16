@@ -11,10 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-import Utils.Config;
-import Utils.ErrCode;
 import controller.BankController;
+import utils.Config;
+import utils.ErrCode;
 
 import javax.swing.JButton;
 
@@ -49,10 +50,14 @@ public class ManagerInterface extends JFrame{
 		titlePanel.setOpaque(false);
 		titlePanel.setBounds(50, 80, 400, 50);
 		
-		JPanel operationPanel = new JPanel(new GridLayout(3, 1, 100, 20));
+		JPanel operationPanel = new JPanel(new GridLayout(4, 1, 100, 20));
 		operationPanel.setSize(200, 200);
 		operationPanel.setLocation(150, 200);
 		
+		JButton balance = new JButton("Check Balance");
+		balance.setFont(new Font("Helvetica", Font.PLAIN, 15));
+		balance.setIcon(new ImageIcon("./src/balance.png"));
+		operationPanel.add(balance);
 		JButton checkCustomer = new JButton("Check Customer");
 		checkCustomer.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		checkCustomer.setIcon(new ImageIcon("./src/user.png"));

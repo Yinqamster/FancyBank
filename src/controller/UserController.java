@@ -2,13 +2,11 @@ package controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 //import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import Utils.Config;
-import Utils.ErrCode;
-import Utils.UtilFunction;
 import model.Account;
 import model.Bank;
 import model.CurrencyConfig;
@@ -17,6 +15,10 @@ import model.Loan;
 import model.Name;
 import model.Transaction;
 import model.User;
+import sun.security.action.PutAllAction;
+import utils.Config;
+import utils.ErrCode;
+import utils.UtilFunction;
 
 public class UserController implements BankATMInterface{
 	
@@ -143,7 +145,7 @@ public class UserController implements BankATMInterface{
 		}
 		BigDecimal serviceCharge = number.multiply(currencyConfig.getServiceChargeRate());
 		BigDecimal newBalance = oldBalance.add(number.subtract(serviceCharge));
-		bank.setBalance(bank.getBalance().add(serviceCharge));
+		bank.getBalance().put(currency, bank.getBalance().get(currency).add(serviceCharge));
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
 		
@@ -189,7 +191,7 @@ public class UserController implements BankATMInterface{
 		}
 		
 		BigDecimal newBalance = oldBalance.subtract(number).subtract(serviceCharge);
-		bank.setBalance(bank.getBalance().add(serviceCharge));
+		bank.getBalance().put(currency, bank.getBalance().get(currency).add(serviceCharge));
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
 		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.WITHDRAW, accountNumber, "");
@@ -232,7 +234,7 @@ public class UserController implements BankATMInterface{
 			return ErrCode.NOENOUGHMONEY;
 		}
 		BigDecimal newBalance = oldBalance.subtract(number).subtract(serviceCharge);
-		bank.setBalance(bank.getBalance().add(serviceCharge));
+		bank.getBalance().put(currency, bank.getBalance().get(currency).add(serviceCharge));
 		fromBalanceList.put(currency, newBalance);
 		fromAccount.setBalance(fromBalanceList);
 		Transaction t = new Transaction(number, serviceCharge, newBalance, UtilFunction.now(), remarks, Config.TRANSFEROUT, fromAccountNumber, toAccountNumber);
@@ -279,7 +281,7 @@ public class UserController implements BankATMInterface{
 			return ErrCode.NOENOUGHMONEY;
 		}
 		BigDecimal newBalance = oldBalance.add(number.subtract(serviceCharge));
-		bank.setBalance(bank.getBalance().add(serviceCharge));
+		bank.getBalance().put(currency, bank.getBalance().get(currency).add(serviceCharge));
 		balanceList.put(currency, newBalance);
 		account.setBalance(balanceList);
 		
@@ -299,7 +301,7 @@ public class UserController implements BankATMInterface{
 				|| balanceList.get(Config.DEFAULTCURRENCY).compareTo(serviceCharge) < 0) {
 			return ErrCode.NOENOUGHMONEY;
 		}
-		bank.setBalance(bank.getBalance().add(serviceCharge));
+		bank.getBalance().put(Config.DEFAULTCURRENCY, bank.getBalance().get(Config.DEFAULTCURRENCY).add(serviceCharge));
 		user.getAccounts().remove(accountNumber);
 		bank.getAccountList().remove(accountNumber);
 		bank.addUser(username, user);
@@ -377,7 +379,7 @@ public class UserController implements BankATMInterface{
 		user.getAccounts().get(accountNumber).getBalance().put(loan.getCurrency(), newBalance);
 		Transaction transaction = new Transaction(loan.getNumber(), interestsForLoan, newBalance, UtilFunction.now(), null, Config.PAYFORLOAN, accountNumber, "");
 		user.getAccounts().get(accountNumber).addTransactionDetails(transaction);
-		bank.setBalance(bank.getBalance().add(interestsForLoan));
+		bank.getBalance().put(loan.getCurrency(), bank.getBalance().get(loan.getCurrency()).add(interestsForLoan));
 		loan.setStatus(Config.PAIED);
 		user.getLoanList().put(loanName, loan);
 		return ErrCode.OK;
