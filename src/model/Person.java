@@ -6,14 +6,16 @@ public class Person {
 	private PhoneNumber phoneNumber;
 	private String email;
 	private Date dob;
+	private int sex;
 	private int ID;
 	
 	public Person() {}
-	public Person(Name name, int phoneNumber, String email, Date dob) {
+	public Person(Name name, int phoneNumber, String email, Date dob, int sex) {
 		this.name = name;
 		this.phoneNumber = new PhoneNumber(phoneNumber);
 		this.email = email;
 		this.dob = dob;
+		this.sex = sex;
 	}
 	
 	public Name getName() {
@@ -22,6 +24,14 @@ public class Person {
 	
 	public void setName(Name name) {
 		this.name = name;
+	}
+	
+	public int getSex() {
+		return this.sex;
+	}
+	
+	public  void setSex(int sex) {
+		this.sex = sex;
 	}
 	
 	public int getPhoneNumber() {

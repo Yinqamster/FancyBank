@@ -1,11 +1,18 @@
 package controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import model.Account;
 import model.Bank;
@@ -50,7 +57,7 @@ public class BankController implements BankATMInterface{
 	}
 
 	@Override
-	public int register(Name name, String phoneNum, String email, String birthday, String password, String cPassword) {
+	public int register(Name name, int sex, String phoneNum, String email, String birthday, String password, String cPassword) {
 		return ErrCode.OK;
 	}
 
@@ -87,6 +94,114 @@ public class BankController implements BankATMInterface{
 		
 		return ErrCode.OK;
 	}
+	
+	//check customer
+	public List<User> getUsersByCondition(String username, int sortBy, int sortOrder) {
+		List<User> res = new ArrayList<User>();
+		if(username != null && !username.isEmpty()) {
+			if(bank.getUserList().containsKey(username)){
+				res.add(bank.getUserList().get(username));
+			}
+			else{
+				return null;
+			}
+		}
+		else {
+			for(User user : bank.getUserList().values()){
+				res.add(user);
+			}
+		}
+		
+		res.sort(new Comparator<User>() {
+			@Override
+			public int compare(User o1, User o2) {
+				// TODO Auto-generated method stub
+				if(sortBy == Config.SORTBYID) {
+					if(sortOrder == Config.ASC) {
+						if(o1.getID() < o2.getID()) {
+							return -1;
+						}
+						else if(o1.getID() == o2.getID()) {
+							return 0;
+						}
+						else if(o1.getID() > o2.getID()) {
+							return 1;
+						}
+					}
+					else if(sortOrder == Config.DESC) {
+						if(o1.getID() < o2.getID()) {
+							return 1;
+						}
+						else if(o1.getID() == o2.getID()) {
+							return 0;
+						}
+						else if(o1.getID() > o2.getID()) {
+							return -1;
+						}
+					}
+				}
+				else if(sortBy == Config.SORTBYLOANSIZE) {
+					int o1LoanSize = o1.getLoanList() == null ? 0 : o1.getLoanList().size();
+					int o2LoanSize = o2.getLoanList() == null ? 0 : o2.getLoanList().size();
+					if(sortOrder == Config.ASC) {
+						
+						if(o1LoanSize < o2LoanSize) {
+							return -1;
+						}
+						else if(o1LoanSize == o2LoanSize) {
+							return 0;
+						}
+						else if(o1LoanSize > o2LoanSize) {
+							return 1;
+						}
+					}
+					else if(sortOrder == Config.DESC) {
+						if(o1LoanSize < o2LoanSize) {
+							return 1;
+						}
+						else if(o1LoanSize == o2LoanSize) {
+							return 0;
+						}
+						else if(o1LoanSize > o2LoanSize) {
+							return -1;
+						}
+					}
+				}
+				else if(sortBy == Config.SORTBYACCOUNTSIZE) {
+					int o1AccountSize = o1.getAccounts() == null ? 0 : o1.getAccounts().size();
+					int o2AccountSize = o2.getAccounts() == null ? 0 : o2.getAccounts().size();
+					if(sortOrder == Config.ASC) {
+						
+						if(o1AccountSize < o2AccountSize) {
+							return -1;
+						}
+						else if(o1AccountSize == o2AccountSize) {
+							return 0;
+						}
+						else if(o1AccountSize > o2AccountSize) {
+							return 1;
+						}
+					}
+					else if(sortOrder == Config.DESC) {
+						if(o1AccountSize < o2AccountSize) {
+							return 1;
+						}
+						else if(o1AccountSize == o2AccountSize) {
+							return 0;
+						}
+						else if(o1AccountSize > o2AccountSize) {
+							return -1;
+						}
+					}
+				}
+				return 0;
+			}
+			
+		});
+		
+		return res;
+	}
+	
 	
 	
 	public int getDailyReport() {
@@ -187,5 +302,7 @@ public class BankController implements BankATMInterface{
             }
         }, time, 1000 * 60 * 60 * 24);//execute per day
     }
+
+	
 	
 }

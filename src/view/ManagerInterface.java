@@ -109,6 +109,7 @@ public class ManagerInterface extends JFrame{
 				// TODO Auto-generated method stub
 				int res = managerController.logout(username);
 				if(res == ErrCode.OK) {
+					ManagerInterface.this.dispose();
 					new Login(Config.MANAGER);
 				}
 				else {
@@ -133,7 +134,8 @@ public class ManagerInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				ManagerInterface.this.dispose();
+				new CheckCustomer(managerController.getUsersByCondition(null, Config.SORTBYID, Config.DESC));
 			}
 		});
 		

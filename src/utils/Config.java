@@ -52,7 +52,18 @@ public class Config {
 	public static final int DISABLE = 0;
 	public static final int ENABLE = 1;
 	
+	//sort
+	public static final int SORTBYID = 0;
+	public static final int SORTBYLOANSIZE = 1;
+	public static final int SORTBYACCOUNTSIZE = 2;
+	//sort order
+	public static final int DESC = 0;
+	public static final int ASC = 1;
 	
+	
+	//sex
+	public static  final int MALE = 0;
+	public static  final int FEMALE = 1;
 	
 	
 	

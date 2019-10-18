@@ -36,7 +36,7 @@ public class UserController implements BankATMInterface{
 	}
 
 	@Override
-	public int register(Name name, String phoneNum, String email, String birthday, String password, String cPassword) {
+	public int register(Name name, int sex, String phoneNum, String email, String birthday, String password, String cPassword) {
 		if(UtilFunction.checkName(name, Config.USER) != ErrCode.OK) {
 			return UtilFunction.checkName(name, Config.USER);
 		}
@@ -52,7 +52,7 @@ public class UserController implements BankATMInterface{
 		if(UtilFunction.checkPassword(password, cPassword) != ErrCode.OK) {
 			return UtilFunction.checkPassword(password, cPassword);
 		}
-		User user = new User(name, (int)Integer.valueOf(phoneNum), email, UtilFunction.stringToDate(birthday), password);
+		User user = new User(name, sex, (int)Integer.valueOf(phoneNum), email, UtilFunction.stringToDate(birthday), password);
 		bank.addUser(user.getName().getNickName(), user);
 		UtilFunction.printUsers();
 		return ErrCode.OK;

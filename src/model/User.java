@@ -20,8 +20,8 @@ public class User extends Person{
 		
 	}
 	
-	public User(Name name, int phoneNum, String email, Date birthday, String password) {
-		super(name, phoneNum, email, birthday);
+	public User(Name name, int sex, int phoneNum, String email, Date birthday, String password) {
+		super(name, phoneNum, email, birthday, sex);
 		int id = getMaxID() + 1;
 		super.setID(id);
 		this.password = password;

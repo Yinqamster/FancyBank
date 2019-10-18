@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import controller.UserController;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
 
 public class Register extends JFrame {
 	
@@ -37,7 +39,7 @@ public class Register extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(40, 180, 400, 500);
-		panel.setLayout(new GridLayout(10, 2, 10, 15));
+		panel.setLayout(new GridLayout(11, 2, 10, 15));
 		
 		JLabel background = new JLabel();
 		ImageIcon bg=new ImageIcon("./src/login_background.png");
@@ -82,6 +84,16 @@ public class Register extends JFrame {
 		JTextField uname = new JTextField(10);
 		uname.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(uname);
+		
+		JLabel sex = new JLabel("Sex*:");
+		sex.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(sex);
+		sex.setFont(new Font("Helvetica",Font.PLAIN,15));
+		JComboBox<String> se = new JComboBox<String>();
+		se.addItem("Female");
+		se.addItem("Male");
+		se.setFont(new Font("Helvetica",Font.PLAIN,15));
+		panel.add(se);
 		
 		JLabel phoneNumber = new JLabel("Phone Number*:");
 		phoneNumber.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -135,7 +147,7 @@ public class Register extends JFrame {
 		contentPanel.add(panel);
 		contentPanel.add(background);
 		
-		this.add(contentPanel);
+		getContentPane().add(contentPanel);
 		
 		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
 		int totalWidth = 500;
@@ -162,9 +174,10 @@ public class Register extends JFrame {
 				String birthday = date.getText();
 				String password = pwd.getText();
 				String cPassword = cpwd.getText();
+				int sex = se.getSelectedItem().equals("Female") ? Config.FEMALE : Config.MALE;
 				int res = -1;
 				if(identity == Config.USER) {
-					res = userController.register(name, phoneNum, email, birthday, password, cPassword);
+					res = userController.register(name, sex, phoneNum, email, birthday, password, cPassword);
 					
 				}
 //				else if(identity == Config.MANAGER) {

@@ -49,5 +49,14 @@ public class Name {
 	public String getNickName() {
 		return nickName;
 	}
+	
+	public String getFullName() {
+		String fullname = firstName + " ";
+		if(!middleName.isEmpty() && middleName != null) {
+			fullname += middleName + " ";
+		}
+		fullname += lastName;
+		return fullname;
+	}
 		
 }
