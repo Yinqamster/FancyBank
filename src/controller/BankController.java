@@ -3,16 +3,12 @@ package controller;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import model.Account;
 import model.Bank;
@@ -203,6 +199,21 @@ public class BankController implements BankATMInterface{
 	}
 	
 	
+	public int passLoan(String username, String loanName) {
+		if(!bank.getUserList().containsKey(username)) {
+			return ErrCode.USERNAMENOTEXISTS;
+		}
+		if(bank.getUserList().get(username).getLoanList() == null 
+				|| !bank.getUserList().get(username).getLoanList().containsKey(loanName)) {
+			return ErrCode.LOANNAMENOTEXIST;
+		}
+		if(bank.getUserList().get(username).getLoanList().get(loanName).getStatus() != Config.PROCESSING) {
+			return ErrCode.LOANCANNOTBEPASSED;
+		}
+		bank.getUserList().get(username).getLoanList().get(loanName).setStatus(Config.PASSED);
+		return ErrCode.OK;
+	}
+	
 	
 	public int getDailyReport() {
 		
@@ -287,7 +298,7 @@ public class BankController implements BankATMInterface{
 		                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getConfig().getBalanceForInterest();
 		                				if(balance.getValue().compareTo(balanceForInterest) >= 0) {
 		                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getConfig().getInterestsForSavingAccount();
-		                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"));
+		                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"), 4, BigDecimal.ROUND_FLOOR);
 		                					balance.setValue(balance.getValue().add(interests));
 		                				}
 		                			}

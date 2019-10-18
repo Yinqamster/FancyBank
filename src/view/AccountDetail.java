@@ -174,7 +174,7 @@ public class AccountDetail extends JFrame{
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						AccountDetail.this.dispose();
-						new TransactionDetail(username, accountList.getSelectedItem().toString(), t);
+						new TransactionDetail(username, accountList.getSelectedItem().toString(), t, Config.USER);
 					}
 				});
 			}

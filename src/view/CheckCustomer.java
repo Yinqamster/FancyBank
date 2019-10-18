@@ -3,13 +3,10 @@ package view;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,12 +19,9 @@ import javax.swing.JTextField;
 
 import controller.BankController;
 import controller.UserController;
-import jdk.internal.org.objectweb.asm.Label;
-import model.Transaction;
 import model.User;
 import utils.Config;
 import utils.ErrCode;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class CheckCustomer extends JFrame{
@@ -177,7 +171,8 @@ public class CheckCustomer extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						
+						CheckCustomer.this.dispose();
+						new UserDetail(user.getName().getNickName(), null);
 					}
 				});
 			}

@@ -364,9 +364,11 @@ public class UserController implements BankATMInterface{
 		if(!user.getAccounts().containsKey(accountNumber)) {
 			return ErrCode.NOSUCHACCOUNT;
 		}
-		int days = UtilFunction.calculateTimeDifference(loan.getStartDate(), loan.getDueDate());
+		int days = UtilFunction.calculateTimeDifference(loan.getStartDate(), UtilFunction.now()) + 1;
 		BigDecimal interestRate = bank.getCurrencyList().get(loan.getCurrency()).getConfig().getInterestsForLoan();
-		BigDecimal interestsForLoan = loan.getNumber().multiply(interestRate).multiply(new BigDecimal(String.valueOf(days))).divide(new BigDecimal("365"));
+		BigDecimal interestsForLoan = loan.getNumber().multiply(interestRate)
+				.multiply(new BigDecimal(days))
+				.divide(new BigDecimal("365"), 4, BigDecimal.ROUND_CEILING);
 		BigDecimal oldBalance = user.getAccounts().get(accountNumber).getBalance().get(loan.getCurrency());
 		if(!user.getAccounts().get(accountNumber).getBalance().containsKey(loan.getCurrency())
 				|| oldBalance.compareTo(loan.getNumber().add(interestsForLoan))<0) {

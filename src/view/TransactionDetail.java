@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import controller.BankController;
 import controller.UserController;
 import model.Transaction;
+import model.User;
 import utils.Config;
 import utils.ErrCode;
 
@@ -25,7 +26,7 @@ public class TransactionDetail extends JFrame{
 	public UserController userController = UserController.getInstance();
 	public BankController managerController = BankController.getInstance();
 
-	public TransactionDetail(String username, String accountNumber, Transaction t) {
+	public TransactionDetail(String username, String accountNumber, Transaction t, String identity) {
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(null);
 		
@@ -197,7 +198,13 @@ public class TransactionDetail extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				TransactionDetail.this.dispose();
-				new AccountDetail(username, accountNumber);
+				if(identity.equals(Config.MANAGER)) {
+					new UserDetail(username, accountNumber);
+				}
+				else if(identity.equals(Config.USER)) {
+					new AccountDetail(username, accountNumber);
+				}
+				
 			}
 		});
 		
@@ -209,7 +216,7 @@ public class TransactionDetail extends JFrame{
 				int res = userController.logout(username);
 				if(res == ErrCode.OK) {
 					TransactionDetail.this.dispose();
-					new Login(Config.USER);
+					new Login(identity);
 				}
 				else {
 					//this shouldn't happen
