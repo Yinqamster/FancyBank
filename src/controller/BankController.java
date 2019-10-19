@@ -48,7 +48,7 @@ public class BankController implements BankATMInterface{
 		if(bank == null) {
 			bank = new Bank();
 		}
-		handInterest();
+//		handInterest();
 		return bank;
 	}
 
@@ -273,21 +273,21 @@ public class BankController implements BankATMInterface{
 	
 	
 	//hand interests for saving accounts
-	public static void handInterest() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
- 
-        Date time = calendar.getTime();         // execute at 12：00：00
- 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                System.out.println("begin to hand interests");
+	public int handInterest() {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 12);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+// 
+//        Date time = calendar.getTime();         // execute at 12：00：00
+// 
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            public void run() {
+//                System.out.println("begin to hand interests");
                 if(bank.getUserList().size() > 0) {
 	                for(User user : bank.getUserList().values()) {
-	                	if(user.getAccounts().size() > 0) {
+	                	if(user.getAccounts() != null && user.getAccounts().size() > 0) {
 		                	for(Account account: user.getAccounts().values()) {
 		                		if(account.getAccountType() == Config.SAVINGACCOUNT) {
 		                			Map<String, BigDecimal> balanceList = account.getBalance();
@@ -307,8 +307,10 @@ public class BankController implements BankATMInterface{
 	                	}
 	                }
                 }
-            }
-        }, time, 1000 * 60 * 60 * 24);//execute per day
+//            }
+//        }, time, 1000 * 60 * 60 * 24);//execute per day
+        
+        return ErrCode.OK;
     }
 
 	

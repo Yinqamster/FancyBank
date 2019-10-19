@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.BankController;
@@ -49,8 +50,8 @@ public class ManagerInterface extends JFrame{
 		titlePanel.setOpaque(false);
 		titlePanel.setBounds(50, 80, 400, 50);
 		
-		JPanel operationPanel = new JPanel(new GridLayout(4, 1, 100, 20));
-		operationPanel.setSize(200, 200);
+		JPanel operationPanel = new JPanel(new GridLayout(5, 1, 100, 15));
+		operationPanel.setSize(200, 240);
 		operationPanel.setLocation(150, 200);
 		
 		JButton checkBalance = new JButton("Check Balance");
@@ -69,6 +70,10 @@ public class ManagerInterface extends JFrame{
 		setConfig.setIcon(new ImageIcon("./src/setting.png"));
 		setConfig.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(setConfig);
+		JButton handInterest = new JButton("Hand Interest");
+		handInterest.setIcon(new ImageIcon("./src/interest.png"));
+		handInterest.setFont(new Font("Helvetica", Font.PLAIN, 15));
+		operationPanel.add(handInterest);
 		
 		panel.add(titlePanel);
 		panel.add(operationPanel);
@@ -155,6 +160,24 @@ public class ManagerInterface extends JFrame{
 				// TODO Auto-generated method stub
 				ManagerInterface.this.dispose();
 				new SetConfig();
+			}
+		});
+		
+		handInterest.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int res = managerController.handInterest();
+				if(res == ErrCode.OK) {
+					Object[] options = {"OK"};
+			        JOptionPane.showOptionDialog(null,  
+			                "Successful!", "Message",  
+			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,   
+			                options,   
+			                options[0]); 
+				}
+				
 			}
 		});
 	}
