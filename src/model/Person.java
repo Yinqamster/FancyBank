@@ -10,7 +10,7 @@ public class Person {
 	private int ID;
 	
 	public Person() {}
-	public Person(Name name, int phoneNumber, String email, Date dob, int sex) {
+	public Person(Name name, long phoneNumber, String email, Date dob, int sex) {
 		this.name = name;
 		this.phoneNumber = new PhoneNumber(phoneNumber);
 		this.email = email;
@@ -34,7 +34,7 @@ public class Person {
 		this.sex = sex;
 	}
 	
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber.getPhoneNumber();
 	}
 	

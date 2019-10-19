@@ -4,17 +4,17 @@ public class PhoneNumber {
 
 	private String region;
 	private int regionCode;
-	private int phoneNumber;
+	private long phoneNumber;
 	
 	public PhoneNumber() {
 		
 	}
 	
-	public PhoneNumber(int phoneNumber) {
+	public PhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return this.phoneNumber;
 	}
 }

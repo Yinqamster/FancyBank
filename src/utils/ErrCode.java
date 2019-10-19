@@ -69,7 +69,7 @@ public class ErrCode {
 			errString = "Last name cannot be empty.";
 			break;
 		case MISSUSERNAME:
-			errString = "User name cannot be enpty.";
+			errString = "User name cannot be empty.";
 			break;
 		case USERNAMEEXISTS:
 			errString = "User name exists, please try another.";

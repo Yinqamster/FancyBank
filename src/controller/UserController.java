@@ -52,7 +52,7 @@ public class UserController implements BankATMInterface{
 		if(UtilFunction.checkPassword(password, cPassword) != ErrCode.OK) {
 			return UtilFunction.checkPassword(password, cPassword);
 		}
-		User user = new User(name, sex, (int)Integer.valueOf(phoneNum), email, UtilFunction.stringToDate(birthday), password);
+		User user = new User(name, sex, (long)Long.parseLong(phoneNum), email, UtilFunction.stringToDate(birthday), password);
 		bank.addUser(user.getName().getNickName(), user);
 		UtilFunction.printUsers();
 		return ErrCode.OK;

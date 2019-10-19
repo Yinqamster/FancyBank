@@ -187,7 +187,7 @@ public class UserInterface extends JFrame{
 		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
 		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
 		
-		this.setTitle( "Bank ATM User Interface" );
+		this.setTitle( "Bank ATM User System" );
 		this.setResizable(false);
 		this.setSize(totalWidth, totalHeight);
 		this.setLocation(locationX, locationY); 
