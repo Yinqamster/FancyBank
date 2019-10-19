@@ -1,6 +1,6 @@
 package model;
 
-public class Date {
+public class Date implements Comparable<Date>{
 	private int year;
 	private int month;
 	private int day;
@@ -37,6 +37,18 @@ public class Date {
 		return this.day;
 	}
 	
+	public int getHour() {
+		return this.hour;
+	}
+	
+	public int getMinute() {
+		return this.minute;
+	}
+	
+	public int getSecond() {
+		return this.second;
+	}
+	
 	
 	public String toDayString() {
 		String string = "" + month + "/" + day + "/" + year;
@@ -46,6 +58,25 @@ public class Date {
 	public String toTimeString() {
 		String string = "" + month + "/" + day + "/" + year +" " + hour + ":" + minute + ":" +second;
 		return string;
+	}
+
+	@Override
+	public int compareTo(Date o) {
+		// TODO Auto-generated method stub
+		if(year > o.getYear() 
+				||(year == o.getYear() && month > o.getMonth())
+				||(year == o.getYear() && month == o.getMonth() && day > o.getDay())
+				||(year == o.getYear() && month == o.getMonth() && day == o.getDay() && hour > o.getHour())
+				||(year == o.getYear() && month == o.getMonth() && day == o.getDay() && hour == o.getHour() && minute > o.getMinute())
+				||(year == o.getYear() && month == o.getMonth() && day == o.getDay() && hour == o.getHour() && minute == o.getMinute() && second > o.getSecond())) {
+			return 1;
+		}
+		else if(year == o.getYear() && month == o.getMonth() && day == o.getDay() && hour == o.getHour() && minute == o.getMinute() && second == o.getSecond()) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
 	}
 	
 }

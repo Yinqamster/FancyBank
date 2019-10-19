@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -14,7 +13,10 @@ import model.Account;
 import model.Bank;
 import model.Currency;
 import model.CurrencyConfig;
+import model.DailyReport;
+import model.Date;
 import model.Name;
+import model.Transaction;
 import model.User;
 import utils.Config;
 import utils.ErrCode;
@@ -212,9 +214,74 @@ public class BankController implements BankATMInterface{
 	}
 	
 	
-	public int getDailyReport() {
+	public DailyReport generateReport() {
+		DailyReport dr = new DailyReport();
+		dr.setUserNumber(bank.getUserList() == null ? 0 : bank.getUserList().size());
+		dr.setOpenAccountNum(bank.getAccountList() == null ? 0 : bank.getAccountList().size());
+		dr.setTransactionNum(bank.getTransactionIdList() == null ? 0 : bank.getTransactionIdList().size());
 		
-		return ErrCode.OK;
+		if(bank.getUserList() != null) {
+			for(User user: bank.getUserList().values()) {
+				if(user.getAccounts() != null) {
+					for(Account account : user.getAccounts().values()) {
+						if(account.getTransactionDetails() != null) {
+							for(Transaction transaction : account.getTransactionDetails().values()) {
+								switch (transaction.getTransactionType()) {
+								case Config.DEPOSIT:
+									if(dr.getCurrencyIn().containsKey(transaction.getCurrency())) {
+										dr.getCurrencyIn().put(transaction.getCurrency(), dr.getCurrencyIn().get(transaction.getCurrency()).add(transaction.getNum()));
+									}
+									else {
+										dr.getCurrencyIn().put(transaction.getCurrency(), transaction.getNum());
+									}
+									break;
+									
+								case Config.WITHDRAW:
+									if(dr.getCurrencyOut().containsKey(transaction.getCurrency())) {
+										dr.getCurrencyOut().put(transaction.getCurrency(), dr.getCurrencyOut().get(transaction.getCurrency()).add(transaction.getNum()));
+									}
+									else {
+										dr.getCurrencyOut().put(transaction.getCurrency(), transaction.getNum());
+									}
+									break;
+
+								default:
+									break;
+								}
+								if(dr.getServiceCharge().containsKey(transaction.getCurrency())) {
+									dr.getServiceCharge().put(transaction.getCurrency(), dr.getServiceCharge().get(transaction.getCurrency()).add(transaction.getServiceCharge()));
+								}
+								else {
+									dr.getServiceCharge().put(transaction.getCurrency(), transaction.getServiceCharge());
+								}
+								dr.getTransactions().add(transaction);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		dr.getTransactions().sort(new Comparator<Transaction>() {
+
+			@Override
+			public int compare(Transaction o1, Transaction o2) {
+				// TODO Auto-generated method stub
+				Date d1 = o1.getDate();
+				Date d2 = o2.getDate();
+				if(d1.compareTo(d2) > 0) {
+					return -1;
+				}
+				else if(d1.compareTo(d1) == 0) {
+					return 0;
+				}
+				else {
+					return -1;
+				}
+			}
+		});
+		
+		return dr;
 	}
 	
 	

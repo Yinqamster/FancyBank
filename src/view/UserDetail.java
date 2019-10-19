@@ -146,6 +146,7 @@ public class UserDetail extends JFrame{
 		accountTitlePanel.setBounds(50, infoPanel.getY() + infoPanel.getHeight() + 20, 900, 60);
 		accountTitlePanel.setLayout(new GridLayout(1, 4, 20, 5));
 		
+//		if(accounts != null && accounts.size() != 0) {
 		JLabel account = new JLabel("Number：");
 		account.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JComboBox<String> accountList = new JComboBox<String>();
@@ -404,7 +405,7 @@ public class UserDetail extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int res = userController.logout(username);
+				int res = managerController.logout(username);
 				if(res == ErrCode.OK) {
 					UserDetail.this.dispose();
 					new Login(Config.MANAGER);

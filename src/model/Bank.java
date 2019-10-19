@@ -21,7 +21,7 @@ public class Bank{
 	private Map<String, User> userList = new HashMap<String, User>();
 	//currency name, currrency
 	private Map<String, Currency> currencyList = new HashMap<String, Currency>();
-	
+	//account number, user name
 	private Map<String, String> accountList = new HashMap<String, String>();
 	private List<String> transactionIdList = new ArrayList<String>();
 	

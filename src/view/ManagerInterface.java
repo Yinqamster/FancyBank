@@ -149,7 +149,8 @@ public class ManagerInterface extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				ManagerInterface.this.dispose();
+				new GetDailyReport();
 			}
 		});
 		

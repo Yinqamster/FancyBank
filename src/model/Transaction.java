@@ -17,14 +17,18 @@ public class Transaction {
 	private BigDecimal serviceCharge;
 	private BigDecimal balance;
 	private String currency;
+	private String username;
+	private int userID;
 	
 	public Transaction() {
 		this.transactionID = UtilFunction.generateTransactionID();
 	}
 	
-	public Transaction(String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance,
+	public Transaction(String username, int userID, String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance,
 			Date date, String remarks, int transactionType) {
 		this();
+		this.username = username;
+		this.userID = userID;
 		this.currency = currency;
 		this.num = num;
 		this.serviceCharge = serviceCharge;
@@ -35,11 +39,15 @@ public class Transaction {
 		
 	}
 	
-	public Transaction(String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
+	public Transaction(String username, int userID, String currency, BigDecimal num, BigDecimal serviceCharge, BigDecimal balance, 
 			Date date, String remarks, int transactionType, String from, String to) {
-		this(currency, num, serviceCharge, balance, date, remarks, transactionType);
+		this(username, userID, currency, num, serviceCharge, balance, date, remarks, transactionType);
 		this.fromAccountNumber = from;
 		this.toAccountNumber = to;
+	}
+	
+	public String getUsername() {
+		return this.username;
 	}
 	
 	public int getTransactionType(){
