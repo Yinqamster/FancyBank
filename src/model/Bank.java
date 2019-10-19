@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for bank
+*/
 package model;
 
 import java.math.BigDecimal;
@@ -18,15 +23,21 @@ public class Bank{
 	private BigDecimal openAccountFee;
 	
 	//userId, user
-	private Map<String, User> userList = new HashMap<String, User>();
+	private Map<String, User> userList;
 	//currency name, currrency
-	private Map<String, Currency> currencyList = new HashMap<String, Currency>();
+	private Map<String, Currency> currencyList;
 	//account number, user name
-	private Map<String, String> accountList = new HashMap<String, String>();
-	private List<String> transactionIdList = new ArrayList<String>();
+	private Map<String, String> accountList;
+	//transaction id
+	private List<String> transactionIdList;
 	
 	public Bank(){
 		balance = new HashMap<String, BigDecimal>();
+		userList = new HashMap<String, User>();
+		currencyList = new HashMap<String, Currency>();
+		accountList = new HashMap<String, String>();
+		transactionIdList = new ArrayList<String>();
+		
 		balance.put(Config.DEFAULTCURRENCY, new BigDecimal("0"));
 		openAccountFee = Config.DEFAULTOPENACCOUNTFEE;
 		closeAccountFee = Config.DEFAULTCLOSEACCOUNTFEE;
@@ -37,6 +48,10 @@ public class Bank{
 				Config.DEFAULTINTERESTSFORSAVINGACCOUNT,
 				Config.DEFAULTBALANCEFORINTEREST);
 		currencyList.put(Config.DEFAULTCURRENCY, new Currency(Config.DEFAULTCURRENCY, currencyConfig));
+	}
+	
+	public String getUsername() {
+		return this.username;
 	}
 	
 	public String getPassword() {
@@ -52,8 +67,16 @@ public class Bank{
 		this.balance = balance;
 	}
 	
+	public BigDecimal getOpenAccountFee() {
+		return this.openAccountFee;
+	}
+	
 	public void setOpenAccountFee(BigDecimal open) {
 		this.openAccountFee = open;
+	}
+	
+	public BigDecimal getCloseAccountFee() {
+		return this.closeAccountFee;
 	}
 	
 	public void setCloseAccountFee(BigDecimal close) {
@@ -92,27 +115,4 @@ public class Bank{
 		this.transactionIdList.add(transactionId);
 	}
 	
-	public BigDecimal getOpenAccountFee() {
-		return this.openAccountFee;
-	}
-	
-	public BigDecimal getCloseAccountFee() {
-		return this.closeAccountFee;
-	}
-	
-	
-	
-	public void print() {
-		System.out.println("================================================");
-//		System.out.println("User ID: " + this.getID());
-//		System.out.println("First Name: " + this.getName().getFirstName());
-//		System.out.println("Middle Name: " + this.getName().getMiddleName());
-//		System.out.println("Last Name: " + this.getName().getLastName());
-//		System.out.println("Username Name: " + this.getName().getNickName());
-//		System.out.println("Phone Number: " + this.getPhoneNumber());
-//		System.out.println("Email: " + this.getEmail());
-//		System.out.println("Birthday: " + this.getDob().toString());
-//		System.out.println("Password: " + password);
-		System.out.println("================================================");
-	}
 }

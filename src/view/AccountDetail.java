@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for account detail
+* @system user
+*/
 package view;
 
 import java.awt.Dimension;
@@ -25,6 +31,7 @@ import utils.Config;
 import utils.ErrCode;
 
 public class AccountDetail extends JFrame{
+	
 	public UserController userController = UserController.getInstance();
 	public BankController managerController = BankController.getInstance();
 
@@ -99,7 +106,6 @@ public class AccountDetail extends JFrame{
 		infoPanel.add(aTypeLabel);
 		
 		
-		
 		JPanel balanceLabelPanel = new JPanel();
 		balanceLabelPanel.setBounds(40, infoPanel.getY()+infoPanel.getHeight()+20, 400, 25);
 		balanceLabelPanel.setLayout(new GridLayout(1, 1, 10, 5));
@@ -131,7 +137,6 @@ public class AccountDetail extends JFrame{
 			}
 			balanceScrollPanel.setViewportView(balancePanel);
 		}
-		
 		
 		
 		

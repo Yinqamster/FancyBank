@@ -1,6 +1,11 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for identity choosing
+* @system user, manager
+*/
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,14 +19,7 @@ import utils.Config;
 
 public class ChooseIdentity extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public ChooseIdentity () {
-		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
-//		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER,100,20));
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		

@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for transacting
+* @system user
+*/
 package view;
 
 import java.awt.Dimension;

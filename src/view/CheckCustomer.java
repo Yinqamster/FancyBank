@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for customer checking
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -86,16 +92,11 @@ public class CheckCustomer extends JFrame{
 		sortOrder.addItem("Asc");
 		searchPanel.add(sort);
 		searchPanel.add(sortOrder);
-//		searchPanel.add(new JLabel());
 		JButton search = new JButton("Search");
 		searchPanel.add(search);
 		
 		
 		JPanel userPanel = new JPanel();
-//		JScrollPane scrollPane = new JScrollPane();
-//		fillUserPanel(scrollPane, userPanel, null, Config.SORTBYID, Config.DESC);
-		
-//		List<User> results = managerController.getUsersByCondition(null, Config.SORTBYID, Config.DESC);
 		int userPanelRows = customerList == null || customerList.size() == 0 ? 0 : customerList.size() + 1;
 		JScrollPane scrollPane = new JScrollPane();
 		int scrollPaneHeight = 30*userPanelRows > 240 ? 240 : 30*userPanelRows;

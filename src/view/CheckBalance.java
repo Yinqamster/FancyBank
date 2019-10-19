@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for balance checking
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;

@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the controller for user. It is the back end for user system.
+*/
 package controller;
 
 import java.math.BigDecimal;
@@ -114,6 +119,8 @@ public class UserController implements BankATMInterface{
 		return account;
 	}
 	
+	
+	//transact
 	public int deposit(String username, int accountType, String accountNumber, String amount, String currency, String remarks){
 		if(!bank.getCurrencyList().containsKey(currency)) {
 			return ErrCode.NOSUCHCURRENCY;
@@ -311,6 +318,7 @@ public class UserController implements BankATMInterface{
 		return ErrCode.OK;
 	}
 	
+	//get user's true name by user name
 	public String getTruenameByUsername(String username) {
 		String name = "";
 		Name uname = bank.getUserList().get(username).getName();
@@ -322,6 +330,8 @@ public class UserController implements BankATMInterface{
 		return name;
 	}
 	
+	
+	//loan
 	public Map<String, Loan> getLoanList(String username) {
 		return bank.getUserList().get(username).getLoanList();
 	}

@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for mainly manager system
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -41,7 +47,6 @@ public class ManagerInterface extends JFrame{
 		JLabel background = new JLabel();
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
-		
 
 		JPanel titlePanel = new JPanel();
 		JLabel title = new JLabel("Manager   System");

@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for currency configuration
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -157,7 +163,6 @@ public class CurrencyConfig extends JFrame{
 		});
 		
 
-//
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override

@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for taking loan
+* @system user
+*/
 package view;
 
 import java.awt.Dimension;

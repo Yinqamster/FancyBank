@@ -1,7 +1,11 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for name
+*/
 package model;
 
 public class Name {
-	//define a person's name
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -50,6 +54,7 @@ public class Name {
 		return nickName;
 	}
 	
+	//get the fully true name
 	public String getFullName() {
 		String fullname = firstName + " ";
 		if(!middleName.isEmpty() && middleName != null) {

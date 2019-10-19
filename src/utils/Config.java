@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the configuration of the project.
+*/
 package utils;
 
 import java.math.BigDecimal;
@@ -7,8 +12,8 @@ public class Config {
 	public static final String USER = "User";
 	public static final String MANAGER = "Manager";
 	
-	public static final String MANAGERUSERNAME = "1";
-	public static final String MANAGERPASSWORD = "1";
+	public static final String MANAGERUSERNAME = "Admin";
+	public static final String MANAGERPASSWORD = "admin";
 	
 	//account type
 	public static final int CHECKINGACCOUNT = 1;

@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for account
+*/
 package model;
 
 import java.math.BigDecimal;

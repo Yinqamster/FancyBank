@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for daily report
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -19,10 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import controller.BankController;
-import model.Account;
 import model.DailyReport;
 import model.Transaction;
-import model.User;
 import utils.Config;
 import utils.ErrCode;
 
@@ -202,8 +206,6 @@ public class GetDailyReport extends JFrame{
 			JPanel transactionPanel = new JPanel();
 			transactionPanel.setLayout(new GridLayout(transactionPanelRows, 10, 10, 5));
 			
-//			JLabel userID = new JLabel("ID: ");
-//			userID.setFont(new Font("Helvetica", Font.PLAIN, 15));
 			JLabel username = new JLabel("Username");
 			username.setFont(new Font("Helvetica", Font.PLAIN, 15));
 			JLabel transactionID = new JLabel("ID");

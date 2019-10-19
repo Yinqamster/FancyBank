@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for daily report
+*/
 package model;
 
 import java.math.BigDecimal;
@@ -12,8 +17,11 @@ public class DailyReport {
 	private int userNumber;
 	private int openAccountNum;
 	private int transactionNum;
+	//currency name, number
 	private Map<String, BigDecimal> currencyIn;
+	//currency name, number
 	private Map<String, BigDecimal> currencyOut;
+	//currency name, number
 	private Map<String, BigDecimal> serviceCharge;
 	private List<Transaction> transactions;
 	
@@ -35,20 +43,6 @@ public class DailyReport {
 		this.openAccountNum = n;
 	}
 	
-	public Map<String, BigDecimal> getCurrencyIn() {
-		return this.currencyIn;
-	}
-	
-	
-	
-	public Map<String, BigDecimal> getCurrencyOut() {
-		return this.currencyOut;
-	}
-	
-	public Map<String, BigDecimal> getServiceCharge() {
-		return this.serviceCharge;
-	}
-	
 	public int getTransactionNum() {
 		return this.transactionNum;
 	}
@@ -63,6 +57,18 @@ public class DailyReport {
 	
 	public void setUserNumber(int n) {
 		this.userNumber = n;
+	}
+	
+	public Map<String, BigDecimal> getCurrencyIn() {
+		return this.currencyIn;
+	}
+	
+	public Map<String, BigDecimal> getCurrencyOut() {
+		return this.currencyOut;
+	}
+	
+	public Map<String, BigDecimal> getServiceCharge() {
+		return this.serviceCharge;
 	}
 	
 	public List<Transaction> getTransactions() {

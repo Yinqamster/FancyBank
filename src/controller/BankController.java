@@ -1,13 +1,16 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the controller for bank. It is the back end for manager system.
+*/
+
 package controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import model.Account;
 import model.Bank;
@@ -88,12 +91,8 @@ public class BankController implements BankATMInterface{
 		return bank.getBalance();
 	}
 	
-	public int checkCustomer() {
-		
-		return ErrCode.OK;
-	}
-	
 	//check customer
+	//select users by some conditions
 	public List<User> getUsersByCondition(String username, int sortBy, int sortOrder) {
 		List<User> res = new ArrayList<User>();
 		if(username != null && !username.isEmpty()) {
@@ -333,12 +332,6 @@ public class BankController implements BankATMInterface{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 	//hand interests for saving accounts
 	public int handInterest() {
 //        Calendar calendar = Calendar.getInstance();
@@ -381,7 +374,4 @@ public class BankController implements BankATMInterface{
         
         return ErrCode.OK;
     }
-
-	
-	
 }

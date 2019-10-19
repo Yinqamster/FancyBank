@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for user details
+* @system manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -146,7 +152,6 @@ public class UserDetail extends JFrame{
 		accountTitlePanel.setBounds(50, infoPanel.getY() + infoPanel.getHeight() + 20, 900, 60);
 		accountTitlePanel.setLayout(new GridLayout(1, 4, 20, 5));
 		
-//		if(accounts != null && accounts.size() != 0) {
 		JLabel account = new JLabel("Number：");
 		account.setFont(new Font("Helvetica",Font.PLAIN,15));
 		JComboBox<String> accountList = new JComboBox<String>();
@@ -163,7 +168,6 @@ public class UserDetail extends JFrame{
 		if(accountList.getSelectedItem() != null) {
 			selectedAccount = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
 		}
-//		Account selectedAccount = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
 		
 		JLabel accountType = new JLabel("Type:");
 		accountType.setFont(new Font("Helvetica", Font.PLAIN, 15));
@@ -214,8 +218,6 @@ public class UserDetail extends JFrame{
 		}
 		
 		
-		
-		
 		JPanel transactionLabelPanel = new JPanel();
 		transactionLabelPanel.setBounds(50, balanceScrollPanel.getY() + balanceScrollPanel.getHeight() + 20, 900, 25);
 		transactionLabelPanel.setLayout(new GridLayout(1, 1, 10, 5));
@@ -261,9 +263,6 @@ public class UserDetail extends JFrame{
 			}
 			transactionScrollPanel.setViewportView(transactionPanel);
 		}
-		
-		
-		
 		
 		
 		JPanel loanLabelPanel = new JPanel();

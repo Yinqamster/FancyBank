@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for user who uses the bank ATM
+*/
 package model;
 
 import java.util.HashMap;
@@ -9,11 +14,7 @@ public class User extends Person{
 
 	private String password;
 	private int status;
-	
-//	private int userID;
-	
 	private Map<String, Account> accounts;
-	
 	private Map<String, Loan> loanList;
 	
 	public User(){
@@ -79,7 +80,8 @@ public class User extends Person{
 		System.out.println("Username Name: " + this.getName().getNickName());
 		System.out.println("Phone Number: " + this.getPhoneNumber());
 		System.out.println("Email: " + this.getEmail());
-		System.out.println("Birthday: " + this.getDob().toString());
+		System.out.println("Sex: " + this.getSex());
+		System.out.println("Birthday: " + this.getDob().toTimeString());
 		System.out.println("Password: " + password);
 		System.out.println("================================================");
 	}

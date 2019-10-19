@@ -1,7 +1,11 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for person
+*/
 package model;
 
 public class Person {
-	//define a normal person with name
 	private Name name;
 	private PhoneNumber phoneNumber;
 	private String email;

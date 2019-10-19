@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for registration
+* @system user
+*/
 package view;
 
 import java.awt.Dimension;
@@ -26,7 +32,6 @@ import controller.UserController;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import javax.swing.JRadioButton;
 
 public class Register extends JFrame {
 	
@@ -206,7 +211,6 @@ public class Register extends JFrame {
 			}
 		});
 
-//
 		cancel.addActionListener(new ActionListener() {
 			
 			@Override

@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the error code of the project.
+*/
 package utils;
 
 public class ErrCode {
@@ -45,9 +50,6 @@ public class ErrCode {
 	//set config
 	public static final int CURRENCYISNULL = 401;
 	public static final int INPUTNOTANUMBER = 402;
-	
-	
-	
 	
 	
 	public static String errCodeToStr(int errCode) {
@@ -163,10 +165,6 @@ public class ErrCode {
 			errString = "Error. Please try later.";
 			break;
 		}
-		
-		
-		
-		
 		return errString;
 	}
 }

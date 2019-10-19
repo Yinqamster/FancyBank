@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  Some common functions for the project.
+*/
 package utils;
 
 import java.util.Calendar;
@@ -49,6 +54,7 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//phone number check
 	public static int checkPhoneNumber(String phoneNumber) {
 		if(phoneNumber.isEmpty() || phoneNumber == null) {
 			return ErrCode.MISSPHONENUMBER;
@@ -59,6 +65,7 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//email check
 	public static int checkEmail(String email) {
 		if(email.isEmpty() || email == null) {
 			return ErrCode.MISSEMAIL;
@@ -71,6 +78,7 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//date check
 	public static int checkDate(String dateStr) {
 		if(dateStr.isEmpty() || dateStr == null) {
 			return ErrCode.MISSDATE;
@@ -122,12 +130,14 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//split date input
 	public static Date stringToDate(String str) {
 		String[] date = str.split("/");
 		Date d = new Date((int)Integer.valueOf(date[0]), (int)Integer.valueOf(date[1]), (int)Integer.valueOf(date[2]));
 		return d;
 	}
 	
+	//password check
 	public static int checkPassword(String password){
 		if(password.isEmpty() || password == null) {
 			return ErrCode.MISSPASSWORD;
@@ -135,6 +145,7 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//password and confirm password check
 	public static int checkPassword(String password, String cPassword){
 		if(password.isEmpty() || password == null) {
 			return ErrCode.MISSPASSWORD;
@@ -148,6 +159,7 @@ public class UtilFunction {
 		return ErrCode.OK;
 	}
 	
+	//check number
 	public static boolean isNumber(String str) {
 		Pattern pattern = Pattern.compile("-?[0-9]+\\.?[0-9]*");
         Matcher isNum = pattern.matcher(str);
@@ -157,7 +169,7 @@ public class UtilFunction {
         return true;
 	}
 	
-	
+	//get current time
 	public static Date now() {
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
@@ -169,6 +181,7 @@ public class UtilFunction {
 		return new Date(month, day, year, hour, minute, second);
 	}
 	
+	//generate accountnumber
 	public static String generateAccountNumber() {
 		String str="0123456789";
 	    Random random=new Random();
@@ -188,6 +201,7 @@ public class UtilFunction {
 	    return resStr;
 	}
 	
+	//gemerate transaction id
 	public static String generateTransactionID() {
 		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    Random random=new Random();
@@ -207,6 +221,8 @@ public class UtilFunction {
 	    BankController.getBank().getTransactionIdList().add(resStr);
 	    return resStr;
 	}
+	
+	//calculate time difference
 	public static int calculateTimeDifference(Date beginDate, Date endDate) {
 	    java.util.Date fromDate = new java.util.Date(beginDate.getYear(), beginDate.getMonth(), beginDate.getDay());
 	    java.util.Date toDate = new java.util.Date(endDate.getYear(), endDate.getMonth(), endDate.getDay());

@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for mainly user system
+* @system user
+*/
 package view;
 
 import java.awt.Color;
@@ -182,7 +188,6 @@ public class UserInterface extends JFrame{
 		Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
 		int totalWidth = 500;
 		int totalHeight = loanPanel.getY() + loanPanel.getHeight() + 50;
-//		int totalHeight = contentPanel.getHeight() + 20;
 		totalHeight = totalHeight > 500 ? totalHeight : 500;
 		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
 		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;

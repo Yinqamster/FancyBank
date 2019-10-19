@@ -1,3 +1,8 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  This is the data structure for transaction
+*/
 package model;
 
 import java.math.BigDecimal;
@@ -6,19 +11,19 @@ import utils.Config;
 import utils.UtilFunction;
 
 public class Transaction {
+	private int userID;
+	private int transactionType;
+	private int status;
+	private Date date;
 	private String fromAccountNumber;
 	private String toAccountNumber;
-	private BigDecimal num;
-	private Date date;
-	private int status;
-	private String transactionID;
-	private String remarks;
-	private int transactionType;
-	private BigDecimal serviceCharge;
-	private BigDecimal balance;
 	private String currency;
 	private String username;
-	private int userID;
+	private String transactionID;
+	private String remarks;
+	private BigDecimal num;
+	private BigDecimal serviceCharge;
+	private BigDecimal balance;
 	
 	public Transaction() {
 		this.transactionID = UtilFunction.generateTransactionID();

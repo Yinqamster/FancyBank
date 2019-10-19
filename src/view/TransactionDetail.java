@@ -1,3 +1,9 @@
+/**
+* @author Qi Yin
+* @ID U31787103
+* @description  the interface for transaction details
+* @system user, manager
+*/
 package view;
 
 import java.awt.Dimension;
@@ -17,7 +23,6 @@ import javax.swing.SwingConstants;
 import controller.BankController;
 import controller.UserController;
 import model.Transaction;
-import model.User;
 import utils.Config;
 import utils.ErrCode;
 
