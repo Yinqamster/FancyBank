@@ -98,9 +98,6 @@ public class BankController implements BankATMInterface{
 			if(bank.getUserList().containsKey(username)){
 				res.add(bank.getUserList().get(username));
 			}
-			else{
-				return null;
-			}
 		}
 		else {
 			for(User user : bank.getUserList().values()){

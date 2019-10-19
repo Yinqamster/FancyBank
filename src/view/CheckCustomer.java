@@ -96,7 +96,7 @@ public class CheckCustomer extends JFrame{
 //		fillUserPanel(scrollPane, userPanel, null, Config.SORTBYID, Config.DESC);
 		
 //		List<User> results = managerController.getUsersByCondition(null, Config.SORTBYID, Config.DESC);
-		int userPanelRows = customerList.size() == 0 ? 0 : customerList.size() + 1;
+		int userPanelRows = customerList == null || customerList.size() == 0 ? 0 : customerList.size() + 1;
 		JScrollPane scrollPane = new JScrollPane();
 		int scrollPaneHeight = 30*userPanelRows > 240 ? 240 : 30*userPanelRows;
 		scrollPane.setBounds(50, 240, 900, scrollPaneHeight);
