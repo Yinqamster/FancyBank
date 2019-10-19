@@ -215,7 +215,7 @@ public class SetConfig extends JFrame{
 				if(res == ErrCode.OK) {
 					Object[] options = {"OK"};
 			        JOptionPane.showOptionDialog(null,  
-			                "Successful!", "Message",  
+			        		ErrCode.errCodeToStr(res), "Message",  
 			                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,   
 			                options,   
 			                options[0]); 
@@ -226,7 +226,7 @@ public class SetConfig extends JFrame{
 				else {
 					Object[] options = {"OK"};
 			        JOptionPane.showOptionDialog(null,  
-			                res, "Error",  
+			        		ErrCode.errCodeToStr(res), "Error",  
 			                JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null,   
 			                options,   
 			                options[0]); 

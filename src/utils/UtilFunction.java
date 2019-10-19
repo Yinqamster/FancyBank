@@ -215,6 +215,4 @@ public class UtilFunction {
 	    int days = (int) ((to1 - from1) / (1000 * 60 * 60 * 24));  
 	    return days;
 	}
-	
-	
 }
