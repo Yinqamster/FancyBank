@@ -15,13 +15,13 @@ public class Config {
 	public static final int SAVINGACCOUNT = 2;
 	
 	//log status
-	public static final int NOTLOGGEDIN = 0;
-	public static final int LOGGEDIN = 1;
+	public static final int NOTLOGGEDIN = 1;
+	public static final int LOGGEDIN = 2;
 	
 	//loan status
-	public static final int PROCESSING = 0;
-	public static final int PASSED = 1;
-	public static final int PAIED = 2;
+	public static final int PROCESSING = 1;
+	public static final int PASSED = 2;
+	public static final int PAIED = 3;
 	
 	//transaction type
 	public static final int DEPOSIT = 1;
@@ -31,6 +31,7 @@ public class Config {
 	public static final int OPENACCOUNT = 5;
 	public static final int CLOSEACCOUNT = 6;
 	public static final int PAYFORLOAN = 7;
+	public static final int SAVINGACCOUNTINTEREST = 8;
 	
 	
 	//default config
@@ -49,21 +50,21 @@ public class Config {
 	
 	
 	//currency status
-	public static final int DISABLE = 0;
-	public static final int ENABLE = 1;
+	public static final int DISABLE = 1;
+	public static final int ENABLE = 2;
 	
 	//sort
-	public static final int SORTBYID = 0;
-	public static final int SORTBYLOANSIZE = 1;
-	public static final int SORTBYACCOUNTSIZE = 2;
+	public static final int SORTBYID = 1;
+	public static final int SORTBYLOANSIZE = 2;
+	public static final int SORTBYACCOUNTSIZE = 3;
 	//sort order
-	public static final int DESC = 0;
-	public static final int ASC = 1;
+	public static final int DESC = 1;
+	public static final int ASC = 2;
 	
 	
 	//sex
-	public static  final int MALE = 0;
-	public static  final int FEMALE = 1;
+	public static  final int MALE = 1;
+	public static  final int FEMALE = 2;
 	
 	
 	

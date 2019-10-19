@@ -363,7 +363,9 @@ public class BankController implements BankATMInterface{
 		                				if(balance.getValue().compareTo(balanceForInterest) >= 0) {
 		                					BigDecimal interestsRate = bank.getCurrencyList().get(balance.getKey()).getConfig().getInterestsForSavingAccount();
 		                					BigDecimal interests = balance.getValue().multiply(interestsRate).divide(new BigDecimal("365"), 4, BigDecimal.ROUND_FLOOR);
+		                					Transaction t = new Transaction(user.getName().getNickName(), user.getID(), balance.getKey(), interests, BigDecimal.ZERO, balance.getValue().add(interests), UtilFunction.now(), null, Config.SAVINGACCOUNTINTEREST, "", account.getAccountNumber());
 		                					balance.setValue(balance.getValue().add(interests));
+		                					account.addTransactionDetails(t);
 		                				}
 		                			}
 		                			account.setBalance(balanceList);

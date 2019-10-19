@@ -267,8 +267,14 @@ public class GetDailyReport extends JFrame{
 					transactionPanel.add(new JLabel(t.getFromAccountNumber()));
 					transactionPanel.add(new JLabel("Loan"));
 					break;
+				case Config.SAVINGACCOUNTINTEREST:
+					transactionPanel.add(new JLabel("Bank"));
+					transactionPanel.add(new JLabel(t.getToAccountNumber()));
+					break;
 
 				default:
+					transactionPanel.add(new JLabel());
+					transactionPanel.add(new JLabel());
 					break;
 				}
 				transactionPanel.add(new JLabel(String.valueOf(t.getNum())));

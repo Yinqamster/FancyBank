@@ -189,7 +189,7 @@ public class SetConfig extends JFrame{
 		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
 		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
 		
-		this.setTitle( "Bank ATM Register" );
+		this.setTitle( "Bank ATM Set Config" );
 		this.setResizable(false);
 		this.setSize(totalWidth, totalHeight);
 		this.setLocation(locationX, locationY); 

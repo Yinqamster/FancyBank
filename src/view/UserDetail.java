@@ -102,7 +102,7 @@ public class UserDetail extends JFrame{
 		infoPanel.add(sexLabel);
 		infoPanel.add(sex);
 		
-		JLabel phoneLabel = new JLabel("Phone Number: ");
+		JLabel phoneLabel = new JLabel("Phone: ");
 		phoneLabel.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		phoneLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		JLabel pnum = new JLabel(String.valueOf(user.getPhoneNumber()));
@@ -159,7 +159,11 @@ public class UserDetail extends JFrame{
 		accountTitlePanel.add(account);
 		accountTitlePanel.add(accountList);
 		
-		Account selectedAccount = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
+		Account selectedAccount = new Account();
+		if(accountList.getSelectedItem() != null) {
+			selectedAccount = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
+		}
+//		Account selectedAccount = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
 		
 		JLabel accountType = new JLabel("Type:");
 		accountType.setFont(new Font("Helvetica", Font.PLAIN, 15));
@@ -185,12 +189,12 @@ public class UserDetail extends JFrame{
 		balanceLabelPanel.add(balance);
 		
 		Map<String, BigDecimal> balanceList = selectedAccount.getBalance();
-		int balancePanelRows = balanceList.size() == 0 ? 0 : balanceList.size() + 1;
+		int balancePanelRows = balanceList == null || balanceList.size() == 0 ? 0 : balanceList.size() + 1;
 		JScrollPane balanceScrollPanel = new JScrollPane();
 		int balanceScrollPaneHeight = 25*balancePanelRows > 100 ? 100 : 25*balancePanelRows;
 		balanceScrollPanel.setBounds(50, balanceLabelPanel.getY() + balanceLabelPanel.getHeight() + 5, 900, balanceScrollPaneHeight);
 		
-		if(balanceList.size() != 0) {
+		if(balanceList != null && balanceList.size() != 0) {
 			JPanel balancePanel = new JPanel();
 			balancePanel.setLayout(new GridLayout(balancePanelRows, 2, 10, 5));
 		
@@ -220,12 +224,12 @@ public class UserDetail extends JFrame{
 		transactionLabelPanel.add(transaction);
 		
 		Map<String, Transaction> transactionList = selectedAccount.getTransactionDetails();
-		int transactionPanelRows = transactionList.size() == 0 ? 0 : transactionList.size() + 1;
+		int transactionPanelRows = transactionList == null || transactionList.size() == 0 ? 0 : transactionList.size() + 1;
 		JScrollPane transactionScrollPanel = new JScrollPane();
 		int transactionScrollPaneHeight = 30*transactionPanelRows > 150 ? 150 : 30*transactionPanelRows;
 		transactionScrollPanel.setBounds(50, transactionLabelPanel.getY() + transactionLabelPanel.getHeight() + 5, 900, transactionScrollPaneHeight);
 		
-		if(transactionList.size() != 0) {
+		if(transactionList != null && transactionList.size() != 0) {
 			JPanel transactionPanel = new JPanel();
 			transactionPanel.setLayout(new GridLayout(transactionPanelRows, 3, 10, 5));
 			
@@ -405,7 +409,7 @@ public class UserDetail extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int res = managerController.logout(username);
+				int res = managerController.logout(Config.MANAGERUSERNAME);
 				if(res == ErrCode.OK) {
 					UserDetail.this.dispose();
 					new Login(Config.MANAGER);

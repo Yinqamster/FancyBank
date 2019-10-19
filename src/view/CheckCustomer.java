@@ -259,7 +259,7 @@ public class CheckCustomer extends JFrame{
 				int res = managerController.logout(Config.MANAGERUSERNAME);
 				if(res == ErrCode.OK) {
 					CheckCustomer.this.dispose();
-					new Login(Config.MANAGERUSERNAME);
+					new Login(Config.MANAGER);
 				}
 				else {
 					System.out.println("Logout Error");

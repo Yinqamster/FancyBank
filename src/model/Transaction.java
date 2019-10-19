@@ -70,6 +70,8 @@ public class Transaction {
 				return "Close Account";
 			case Config.PAYFORLOAN:
 				return "Pay For Loan";
+			case Config.SAVINGACCOUNTINTEREST:
+				return "Saving Account Interest";
 			default:
 				return "";
 		}

@@ -209,6 +209,7 @@ public class UserController implements BankATMInterface{
 			return ErrCode.NOSUCHACCOUNT;
 		}
 		
+		//from account
 		Account fromAccount = user.getAccounts().get(fromAccountNumber);
 		if(fromAccount.getAccountType() != accountType){
 			System.out.println("Wrong account type and account number");
@@ -226,7 +227,7 @@ public class UserController implements BankATMInterface{
 			return ErrCode.NOENOUGHMONEY;
 		}
 		BigDecimal oldBalance = fromBalanceList.get(currency);
-		BigDecimal serviceCharge = number.multiply(currencyConfig.getServiceChargeRate());
+		BigDecimal serviceCharge = fromAccount.getAccountType() == Config.SAVINGACCOUNT ? new BigDecimal("0") : number.multiply(currencyConfig.getServiceChargeRate());
 		if(oldBalance.compareTo(number.add(serviceCharge)) < 0) {
 			return ErrCode.NOENOUGHMONEY;
 		}
@@ -239,14 +240,19 @@ public class UserController implements BankATMInterface{
 		user.getAccounts().put(fromAccountNumber, fromAccount);
 		bank.addUser(username, user);
 		
+		//to account
 		User toUser = bank.getUserList().get(bank.getAccountList().get(toAccountNumber));
 		Account toAccount = toUser.getAccounts().get(toAccountNumber);
 		Map<String, BigDecimal> toBalanceList = toAccount.getBalance();
 		BigDecimal toOldBalance = new BigDecimal("0");
-		if(!toBalanceList.containsKey(currency)){
+		if(toBalanceList.containsKey(currency)){
 			toOldBalance = toBalanceList.get(currency);
 		}
+		System.out.println(amount);
+		System.out.println(toOldBalance);
+		
 		BigDecimal toNewBalance = toOldBalance.add(number);
+		System.out.println(toNewBalance);
 		toBalanceList.put(currency, toNewBalance);
 		toAccount.setBalance(toBalanceList);
 		Transaction toT = new Transaction(toUser.getName().getNickName(), toUser.getID(), currency, number, BigDecimal.ZERO, toNewBalance, UtilFunction.now(), remarks, Config.RECEIVE, fromAccountNumber, toAccountNumber);

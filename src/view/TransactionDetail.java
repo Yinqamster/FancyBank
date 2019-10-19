@@ -100,7 +100,7 @@ public class TransactionDetail extends JFrame{
 			tac.setText(t.getToAccountNumber());
 			panel.add(tac);
 		}
-		else if(t.getTransactionType() == Config.DEPOSIT || t.getTransactionType() == Config.OPENACCOUNT) {
+		else if(t.getTransactionType() == Config.DEPOSIT || t.getTransactionType() == Config.OPENACCOUNT || t.getTransactionType() == Config.SAVINGACCOUNTINTEREST) {
 			//to
 			toAccountNumber.setText("Account Number:");
 			panel.add(toAccountNumber);

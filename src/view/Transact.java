@@ -152,7 +152,14 @@ public class Transact extends JFrame{
 		}
 		else if(transactionType == Config.TRANSFEROUT) {
 			title.setText("Transafer");
-			toAccountList.setEditable(true);
+			if(fromAccountList.getSelectedItem() != null &&
+					userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) != null &&
+					userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())).getAccountType() == Config.CHECKINGACCOUNT) {
+				toAccountList.setEditable(true);
+			}
+			else {
+				toAccountList.setEditable(false);
+			}
 			panel.add(toAccount);
 			panel.add(toAccountList);
 			panel.add(currency);
@@ -185,7 +192,7 @@ public class Transact extends JFrame{
 		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
 		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
 		
-		this.setTitle( "Bank ATM Register" );
+		this.setTitle( "Bank ATM Transact" );
 		this.setResizable(false);
 		this.setSize(totalWidth, totalHeight);
 		this.setLocation(locationX, locationY); 
@@ -198,6 +205,16 @@ public class Transact extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(transactionType == Config.WITHDRAW || transactionType == Config.TRANSFEROUT) {
+					if(transactionType == Config.TRANSFEROUT) {
+						if(fromAccountList.getSelectedItem() != null &&
+								userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) != null &&
+								userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())).getAccountType() == Config.CHECKINGACCOUNT) {
+							toAccountList.setEditable(true);
+						}
+						else {
+							toAccountList.setEditable(false);
+						}
+					}
 					BigDecimal balan = userController.getAccountDetail(username, fromAccountList.getSelectedItem().toString()).getBalance().get(cur.getSelectedItem().toString());
 					bal.setText(String.valueOf(balan == null ? 0 : balan));
 					panel.revalidate();
