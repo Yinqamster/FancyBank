@@ -177,8 +177,10 @@ public class Register extends JFrame {
 				String phoneNum = pnumber.getText();
 				String email = em.getText();
 				String birthday = date.getText();
-				String password = pwd.getText();
-				String cPassword = cpwd.getText();
+				String password = String.valueOf(pwd.getPassword());
+				String cPassword = String.valueOf(cpwd.getPassword());
+				System.out.println(password);
+				System.out.println(cPassword);
 				int sex = se.getSelectedItem().equals("Female") ? Config.FEMALE : Config.MALE;
 				int res = -1;
 				if(identity == Config.USER) {

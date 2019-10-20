@@ -224,10 +224,12 @@ public class UtilFunction {
 	
 	//calculate time difference
 	public static int calculateTimeDifference(Date beginDate, Date endDate) {
-	    java.util.Date fromDate = new java.util.Date(beginDate.getYear(), beginDate.getMonth(), beginDate.getDay());
-	    java.util.Date toDate = new java.util.Date(endDate.getYear(), endDate.getMonth(), endDate.getDay());
-	    long from1 = fromDate.getTime();  
-	    long to1 = toDate.getTime();  
+	    Calendar fromDate = Calendar.getInstance();
+	    fromDate.set(beginDate.getYear(), beginDate.getMonth(), beginDate.getDay());
+	    Calendar toDate = Calendar.getInstance();
+	    toDate.set(endDate.getYear(), endDate.getMonth(), endDate.getDay());
+	    long from1 = fromDate.getTimeInMillis();  
+	    long to1 = toDate.getTimeInMillis();  
 	    int days = (int) ((to1 - from1) / (1000 * 60 * 60 * 24));  
 	    return days;
 	}
