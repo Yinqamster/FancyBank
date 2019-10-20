@@ -71,6 +71,8 @@ public class Config {
 	public static  final int MALE = 1;
 	public static  final int FEMALE = 2;
 	
-	
+	//root path
+	//if use IDE, change to ./src/img/
+	public static final String ROOT = "./img/";
 	
 }

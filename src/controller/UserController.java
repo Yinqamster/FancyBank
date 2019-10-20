@@ -59,7 +59,7 @@ public class UserController implements BankATMInterface{
 		}
 		User user = new User(name, sex, (long)Long.parseLong(phoneNum), email, UtilFunction.stringToDate(birthday), password);
 		bank.addUser(user.getName().getNickName(), user);
-		UtilFunction.printUsers();
+//		UtilFunction.printUsers();
 		return ErrCode.OK;
 	}
 
@@ -255,11 +255,7 @@ public class UserController implements BankATMInterface{
 		if(toBalanceList.containsKey(currency)){
 			toOldBalance = toBalanceList.get(currency);
 		}
-		System.out.println(amount);
-		System.out.println(toOldBalance);
-		
 		BigDecimal toNewBalance = toOldBalance.add(number);
-		System.out.println(toNewBalance);
 		toBalanceList.put(currency, toNewBalance);
 		toAccount.setBalance(toBalanceList);
 		Transaction toT = new Transaction(toUser.getName().getNickName(), toUser.getID(), currency, number, BigDecimal.ZERO, toNewBalance, UtilFunction.now(), remarks, Config.RECEIVE, fromAccountNumber, toAccountNumber);

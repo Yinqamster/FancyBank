@@ -47,7 +47,7 @@ public class Register extends JFrame {
 		panel.setLayout(new GridLayout(11, 2, 10, 15));
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 
@@ -179,8 +179,6 @@ public class Register extends JFrame {
 				String birthday = date.getText();
 				String password = String.valueOf(pwd.getPassword());
 				String cPassword = String.valueOf(cpwd.getPassword());
-				System.out.println(password);
-				System.out.println(cPassword);
 				int sex = se.getSelectedItem().equals("Female") ? Config.FEMALE : Config.MALE;
 				int res = -1;
 				if(identity == Config.USER) {

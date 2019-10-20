@@ -32,15 +32,15 @@ public class ManagerInterface extends JFrame{
 	public ManagerInterface(String username){
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("./src/back.png"));
+		back.setIcon(new ImageIcon(Config.ROOT + "back.png"));
 		back.setBounds(6, 6, 35, 35);
 		panel.add(back);
 		
 		JButton logout = new JButton("");
-		logout.setIcon(new ImageIcon("./src/logout.png"));
+		logout.setIcon(new ImageIcon(Config.ROOT + "logout.png"));
 		logout.setBounds(452, 6, 35, 35);
 		panel.add(logout);
 		
@@ -61,22 +61,22 @@ public class ManagerInterface extends JFrame{
 		
 		JButton checkBalance = new JButton("Check Balance");
 		checkBalance.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		checkBalance.setIcon(new ImageIcon("./src/balance.png"));
+		checkBalance.setIcon(new ImageIcon(Config.ROOT + "balance.png"));
 		operationPanel.add(checkBalance);
 		JButton checkCustomer = new JButton("Check Customer");
 		checkCustomer.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		checkCustomer.setIcon(new ImageIcon("./src/user.png"));
+		checkCustomer.setIcon(new ImageIcon(Config.ROOT + "user.png"));
 		operationPanel.add(checkCustomer);
 		JButton getDailyReport = new JButton("Get Daily Report");
-		getDailyReport.setIcon(new ImageIcon("./src/report.png"));
+		getDailyReport.setIcon(new ImageIcon(Config.ROOT + "report.png"));
 		getDailyReport.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(getDailyReport);
 		JButton setConfig = new JButton("Set Config");
-		setConfig.setIcon(new ImageIcon("./src/setting.png"));
+		setConfig.setIcon(new ImageIcon(Config.ROOT + "setting.png"));
 		setConfig.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(setConfig);
 		JButton handInterest = new JButton("Hand Interest");
-		handInterest.setIcon(new ImageIcon("./src/interest.png"));
+		handInterest.setIcon(new ImageIcon(Config.ROOT + "interest.png"));
 		handInterest.setFont(new Font("Helvetica", Font.PLAIN, 15));
 		operationPanel.add(handInterest);
 		

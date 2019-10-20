@@ -41,7 +41,7 @@ public class UserInterface extends JFrame{
 		contentPanel.setLayout(null);
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 		
@@ -54,12 +54,12 @@ public class UserInterface extends JFrame{
 		titlePanel.setBounds(50, 80, 400, 50);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("./src/back.png"));
+		back.setIcon(new ImageIcon(Config.ROOT + "back.png"));
 		back.setBounds(6, 6, 35, 35);
 		contentPanel.add(back);
 		
 		JButton logout = new JButton("");
-		logout.setIcon(new ImageIcon("./src/logout.png"));
+		logout.setIcon(new ImageIcon(Config.ROOT + "logout.png"));
 		logout.setBounds(452, 6, 35, 35);
 		contentPanel.add(logout);
 		
@@ -76,9 +76,6 @@ public class UserInterface extends JFrame{
 
 		List<String> checkingAccounts = userController.getAccountList(username, Config.CHECKINGACCOUNT);
 		List<String> savingAccounts = userController.getAccountList(username, Config.SAVINGACCOUNT);
-		
-		System.out.println("c size: " + checkingAccounts.size());
-		System.out.println("s size: " + savingAccounts.size());
 		
 		boolean hasOperation = savingAccounts.size()==0&&checkingAccounts.size()==0 ? false : true;
 		int rows = savingAccounts.size() + checkingAccounts.size();

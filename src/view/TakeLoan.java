@@ -47,7 +47,7 @@ public class TakeLoan extends JFrame{
 		panel.setLayout(new GridLayout(rows, 2, 10, 15));
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 

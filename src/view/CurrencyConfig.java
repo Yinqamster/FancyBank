@@ -25,6 +25,7 @@ import javax.swing.SwingConstants;
 import controller.BankController;
 import controller.UserController;
 import model.Bank;
+import utils.Config;
 import utils.ErrCode;
 
 public class CurrencyConfig extends JFrame{
@@ -37,7 +38,7 @@ public class CurrencyConfig extends JFrame{
 		contentPanel.setLayout(null);
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 

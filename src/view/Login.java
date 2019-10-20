@@ -34,7 +34,6 @@ public class Login extends JFrame{
 	public BankController managerController = BankController.getInstance();
 
 	public Login(String identity) {
-		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(null);
 		
@@ -43,12 +42,12 @@ public class Login extends JFrame{
 		panel.setLayout(new GridLayout(2, 2, 20, 15));
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 500, 150);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("/Users/qiyin/Documents/eclipse/workspace/BankATM/src/back.png"));
+		back.setIcon(new ImageIcon(Config.ROOT + "back.png"));
 		back.setBounds(6, 6, 35, 35);
 
 		JPanel titlePanel = new JPanel();
@@ -126,7 +125,7 @@ public class Login extends JFrame{
 				// TODO Auto-generated method stub
 				
 				String username = uname.getText();
-				String password = pwd.getText();
+				String password = String.valueOf(pwd.getPassword());
 				int res = -1;
 				if(identity == Config.USER) {
 					res = userController.login(username, password);

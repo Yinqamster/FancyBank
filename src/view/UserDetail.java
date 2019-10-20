@@ -45,7 +45,7 @@ public class UserDetail extends JFrame{
 		contentPanel.setLayout(null);
 		
 		JLabel background = new JLabel();
-		ImageIcon bg=new ImageIcon("./src/login_background.png");
+		ImageIcon bg=new ImageIcon(Config.ROOT + "login_background.png");
 		background.setIcon(bg);
 		background.setBounds(0, 0, 1000, 150);
 
@@ -57,12 +57,12 @@ public class UserDetail extends JFrame{
 		titlePanel.setBounds(300, 80, 400, 50);
 		
 		JButton back = new JButton("");
-		back.setIcon(new ImageIcon("./src/back.png"));
+		back.setIcon(new ImageIcon(Config.ROOT + "back.png"));
 		back.setBounds(6, 6, 35, 35);
 		contentPanel.add(back);
 		
 		JButton logout = new JButton("");
-		logout.setIcon(new ImageIcon("./src/logout.png"));
+		logout.setIcon(new ImageIcon(Config.ROOT + "logout.png"));
 		logout.setBounds(939, 6, 35, 35);
 		contentPanel.add(logout);
 		

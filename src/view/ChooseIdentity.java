@@ -25,7 +25,7 @@ public class ChooseIdentity extends JFrame{
 		
 		JPanel imagePanel = new JPanel();
 		JLabel image = new JLabel();
-		ImageIcon img = new ImageIcon("./src/bank.png");
+		ImageIcon img = new ImageIcon(Config.ROOT + "bank.png");
 		image.setIcon(img);
 		imagePanel.add(image);
 
