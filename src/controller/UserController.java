@@ -22,7 +22,7 @@ import utils.Config;
 import utils.ErrCode;
 import utils.UtilFunction;
 
-public class UserController implements BankATMInterface{
+public class UserController implements SystemInterface{
 	
 	public BankController bankController = BankController.getInstance();
 	public Bank bank = BankController.getBank();

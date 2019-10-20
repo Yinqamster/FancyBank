@@ -25,7 +25,7 @@ import utils.Config;
 import utils.ErrCode;
 import utils.UtilFunction;
 
-public class BankController implements BankATMInterface{
+public class BankController implements SystemInterface{
 	
 	private static BankController instance;
 	
