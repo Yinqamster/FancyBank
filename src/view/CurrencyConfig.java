@@ -69,7 +69,7 @@ public class CurrencyConfig extends JFrame{
 		scr.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(scr);
 		
-		JLabel interestsForSavingAccount = new JLabel("Saving Account Interest Rate*:");
+		JLabel interestsForSavingAccount = new JLabel("Saving Acc Interest Rate*:");
 		interestsForSavingAccount.setHorizontalAlignment(SwingConstants.RIGHT);
 		interestsForSavingAccount.setFont(new Font("Helvetica",Font.PLAIN,15));
 		panel.add(interestsForSavingAccount);
@@ -85,7 +85,7 @@ public class CurrencyConfig extends JFrame{
 		ifl.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(ifl);
 		
-		JLabel balanceForInterest = new JLabel("Lowest Amount For Interest*:");
+		JLabel balanceForInterest = new JLabel("Lowest Balance For Interest*:");
 		balanceForInterest.setHorizontalAlignment(SwingConstants.RIGHT);
 		balanceForInterest.setFont(new Font("Helvetica",Font.PLAIN,15));
 		panel.add(balanceForInterest);
@@ -96,6 +96,7 @@ public class CurrencyConfig extends JFrame{
 		if(!currency.isEmpty() && currency != null && bank.getCurrencyList().containsKey(currency)) {
 			model.CurrencyConfig currencyConfig = bank.getCurrencyList().get(currency).getConfig();
 			n.setText(currency);
+			n.setEditable(false);;
 			scr.setText(String.valueOf(currencyConfig.getServiceChargeRate()));
 			ifsa.setText(String.valueOf(currencyConfig.getInterestsForSavingAccount()));
 			ifl.setText(String.valueOf(currencyConfig.getInterestsForLoan()));

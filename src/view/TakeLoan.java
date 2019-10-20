@@ -138,10 +138,15 @@ public class TakeLoan extends JFrame{
 			title.setText("Pay For Loan");
 			Loan loan = userController.getLoanList(username).get(loanName);
 			lName.setText(loanName);
+			lName.setEditable(false);
 			colla.setText(loan.getCollateral());
+			colla.setEditable(false);
 			cur.setSelectedItem(loan.getCurrency());
+			cur.setEditable(false);
 			num.setText(String.valueOf(loan.getNumber()));
+			num.setEditable(false);
 			date.setText(loan.getDueDate().getMonth()+"/"+loan.getDueDate().getDay()+"/"+loan.getDueDate().getYear());
+			date.setEditable(false);
 			panel.add(status);
 			if(loan.getStatus() == Config.PROCESSING) {
 				sta.setText("Processing");
@@ -177,7 +182,7 @@ public class TakeLoan extends JFrame{
 		int locationX = (int)screenSize.getWidth()/2 - totalWidth/2;
 		int locationY = (int)screenSize.getHeight()/2 - totalHeight/2;
 		
-		this.setTitle( "Bank ATM Take Loan" );
+		this.setTitle( "Bank ATM Loan" );
 		this.setResizable(false);
 		this.setSize(totalWidth, totalHeight);
 		this.setLocation(locationX, locationY); 
