@@ -1,7 +1,7 @@
 # BankATM
-==========
 
-Qi Yin<br>
+Qi Yin
+
 U31787103
 
 # How to run:
