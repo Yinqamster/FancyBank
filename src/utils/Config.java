@@ -73,6 +73,6 @@ public class Config {
 	
 	//root path
 	//if use IDE, change to ./src/img/
-	public static final String ROOT = "./img/";
+	public static final String ROOT = "./src/img/";
 	
 }
