@@ -19,6 +19,7 @@ import model.CurrencyConfig;
 import model.DailyReport;
 import model.Date;
 import model.Name;
+import model.SavingAccount;
 import model.Transaction;
 import model.User;
 import utils.Config;
@@ -349,7 +350,7 @@ public class BankController implements SystemInterface{
 	                for(User user : bank.getUserList().values()) {
 	                	if(user.getAccounts() != null && user.getAccounts().size() > 0) {
 		                	for(Account account: user.getAccounts().values()) {
-		                		if(account.getAccountType() == Config.SAVINGACCOUNT) {
+		                		if(account instanceof SavingAccount) {
 		                			Map<String, BigDecimal> balanceList = account.getBalance();
 		                			for(Map.Entry<String, BigDecimal> balance: balanceList.entrySet()) {
 		                				BigDecimal balanceForInterest = bank.getCurrencyList().get(balance.getKey()).getConfig().getBalanceForInterest();

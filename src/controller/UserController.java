@@ -12,10 +12,12 @@ import java.util.Map;
 
 import model.Account;
 import model.Bank;
+import model.CheckingAccount;
 import model.CurrencyConfig;
 import model.Date;
 import model.Loan;
 import model.Name;
+import model.SavingAccount;
 import model.Transaction;
 import model.User;
 import utils.Config;
@@ -97,7 +99,8 @@ public class UserController implements SystemInterface{
 		List<String> accountList = new ArrayList<String>();
 		User user = bank.getUserList().get(username);
 		for(Account a: user.getAccounts().values()){
-			if(a.getAccountType() == accountType) {
+			if((accountType == Config.SAVINGACCOUNT && a instanceof SavingAccount)
+					|| accountType == Config.CHECKINGACCOUNT && a instanceof CheckingAccount) {
 				accountList.add(a.getAccountNumber());
 			}
 		}
@@ -131,7 +134,8 @@ public class UserController implements SystemInterface{
 			return ErrCode.NOSUCHACCOUNT;
 		}
 		Account account = user.getAccounts().get(accountNumber);
-		if(account.getAccountType() != accountType){
+		if((accountType == Config.SAVINGACCOUNT && !(account instanceof SavingAccount))
+				|| (accountType == Config.CHECKINGACCOUNT && !(account instanceof CheckingAccount))){
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
@@ -170,7 +174,8 @@ public class UserController implements SystemInterface{
 			return ErrCode.NOSUCHACCOUNT;
 		}
 		Account account = user.getAccounts().get(accountNumber);
-		if(account.getAccountType() != accountType){
+		if((accountType == Config.SAVINGACCOUNT && !(account instanceof SavingAccount))
+				|| (accountType == Config.CHECKINGACCOUNT && !(account instanceof CheckingAccount))){
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
@@ -218,7 +223,8 @@ public class UserController implements SystemInterface{
 		
 		//from account
 		Account fromAccount = user.getAccounts().get(fromAccountNumber);
-		if(fromAccount.getAccountType() != accountType){
+		if((accountType == Config.SAVINGACCOUNT && !(fromAccount instanceof SavingAccount))
+				|| (accountType == Config.CHECKINGACCOUNT && !(fromAccount instanceof CheckingAccount))){
 			System.out.println("Wrong account type and account number");
 			return ErrCode.ERROR;
 		}
@@ -234,7 +240,7 @@ public class UserController implements SystemInterface{
 			return ErrCode.NOENOUGHMONEY;
 		}
 		BigDecimal oldBalance = fromBalanceList.get(currency);
-		BigDecimal serviceCharge = fromAccount.getAccountType() == Config.SAVINGACCOUNT ? new BigDecimal("0") : number.multiply(currencyConfig.getServiceChargeRate());
+		BigDecimal serviceCharge = fromAccount instanceof SavingAccount ? new BigDecimal("0") : number.multiply(currencyConfig.getServiceChargeRate());
 		if(oldBalance.compareTo(number.add(serviceCharge)) < 0) {
 			return ErrCode.NOENOUGHMONEY;
 		}
@@ -270,7 +276,13 @@ public class UserController implements SystemInterface{
 	//default deposit some money when open account
 	public int createAccount(String username, int accountType, String currency, BigDecimal number) {
 		Account account = new Account();
-		account.setAccountType(accountType);
+		if(accountType == Config.CHECKINGACCOUNT) {
+			account = new CheckingAccount();
+		}
+		else if(accountType == Config.SAVINGACCOUNT){
+			account = new SavingAccount();
+		}
+//		account.setAccountType(accountType);
 		String accountNumber = UtilFunction.generateAccountNumber();
 		bank.addAccount(accountNumber, username);
 		account.setAccountNumber(accountNumber);

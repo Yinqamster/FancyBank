@@ -29,7 +29,9 @@ import javax.swing.SwingConstants;
 import controller.BankController;
 import controller.UserController;
 import model.Account;
+import model.CheckingAccount;
 import model.Loan;
+import model.SavingAccount;
 import model.Transaction;
 import model.User;
 import utils.Config;
@@ -171,12 +173,11 @@ public class UserDetail extends JFrame{
 		
 		JLabel accountType = new JLabel("Type:");
 		accountType.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		int aType = selectedAccount.getAccountType();
 		JLabel aTypeLabel = new JLabel();
-		if(aType == Config.CHECKINGACCOUNT) {
+		if(selectedAccount instanceof CheckingAccount) {
 			aTypeLabel.setText("Checking Account");
 		}
-		else if(aType == Config.SAVINGACCOUNT) {
+		else if(selectedAccount instanceof SavingAccount) {
 			aTypeLabel.setText("Saving Account");
 		}
 		aTypeLabel.setFont(new Font("Helvetica", Font.PLAIN, 15));

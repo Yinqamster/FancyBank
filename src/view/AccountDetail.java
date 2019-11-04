@@ -26,6 +26,9 @@ import javax.swing.JScrollPane;
 
 import controller.BankController;
 import controller.UserController;
+import model.Account;
+import model.CheckingAccount;
+import model.SavingAccount;
 import model.Transaction;
 import utils.Config;
 import utils.ErrCode;
@@ -93,12 +96,12 @@ public class AccountDetail extends JFrame{
 		
 		JLabel accountType = new JLabel("Account Type:");
 		accountType.setFont(new Font("Helvetica", Font.PLAIN, 15));
-		int aType = userController.getAccountDetail(username, accountList.getSelectedItem().toString()).getAccountType();
+		Account acc = userController.getAccountDetail(username, accountList.getSelectedItem().toString());
 		JLabel aTypeLabel = new JLabel();
-		if(aType == Config.CHECKINGACCOUNT) {
+		if(acc instanceof CheckingAccount) {
 			aTypeLabel.setText("Checking Account");
 		}
-		else if(aType == Config.SAVINGACCOUNT) {
+		else if(acc instanceof SavingAccount) {
 			aTypeLabel.setText("Saving Account");
 		}
 		aTypeLabel.setFont(new Font("Helvetica", Font.PLAIN, 15));

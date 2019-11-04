@@ -28,7 +28,9 @@ import javax.swing.SwingConstants;
 
 import controller.BankController;
 import controller.UserController;
+import model.CheckingAccount;
 import model.Currency;
+import model.SavingAccount;
 import utils.Config;
 import utils.ErrCode;
 
@@ -160,7 +162,7 @@ public class Transact extends JFrame{
 			title.setText("Transafer");
 			if(fromAccountList.getSelectedItem() != null &&
 					userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) != null &&
-					userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())).getAccountType() == Config.CHECKINGACCOUNT) {
+					userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) instanceof CheckingAccount) {
 				toAccountList.setEditable(true);
 			}
 			else {
@@ -214,7 +216,7 @@ public class Transact extends JFrame{
 					if(transactionType == Config.TRANSFEROUT) {
 						if(fromAccountList.getSelectedItem() != null &&
 								userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) != null &&
-								userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())).getAccountType() == Config.CHECKINGACCOUNT) {
+								userController.getAccountDetail(username, String.valueOf(fromAccountList.getSelectedItem())) instanceof CheckingAccount) {
 							toAccountList.setEditable(true);
 						}
 						else {
@@ -273,15 +275,22 @@ public class Transact extends JFrame{
 				String amount = num.getText();
 				String remark = rem.getText();
 				int res = -1;
+				int accountType = 0;
+				if(userController.getAccountDetail(username, toAccountNumber) instanceof CheckingAccount) {
+					accountType = Config.CHECKINGACCOUNT;
+				}
+				else if(userController.getAccountDetail(username, toAccountNumber) instanceof SavingAccount) {
+					accountType = Config.SAVINGACCOUNT;
+				}
 				
 				if(transactionType == Config.DEPOSIT) {
-					res = userController.deposit(username, userController.getAccountDetail(username, toAccountNumber).getAccountType(), toAccountNumber, amount, currency, remark);
+					res = userController.deposit(username, accountType, toAccountNumber, amount, currency, remark);
 				}
 				else if(transactionType == Config.WITHDRAW) {
-					res = userController.withdraw(username, userController.getAccountDetail(username, fromAccountNumber).getAccountType(), fromAccountNumber, amount, currency, remark);
+					res = userController.withdraw(username, accountType, fromAccountNumber, amount, currency, remark);
 				}
 				else if(transactionType == Config.TRANSFEROUT) {
-					res = userController.transfer(username, userController.getAccountDetail(username, fromAccountNumber).getAccountType(), fromAccountNumber, toAccountNumber, amount, currency, remark);
+					res = userController.transfer(username, accountType, fromAccountNumber, toAccountNumber, amount, currency, remark);
 				}
 				
 				if(res == ErrCode.OK) {

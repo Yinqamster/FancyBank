@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Account {
 
-	private int accountType;
+//	private int accountType;
 	private String accountNumber;
 	private Map<String, BigDecimal> balance;
 	private Map<String, Transaction> transactionDetails;
@@ -24,13 +24,13 @@ public class Account {
 		transactionDetails = new HashMap<String, Transaction>();
 	}
 	
-	public int getAccountType(){
-		return this.accountType;
-	}
-	
-	public void setAccountType(int accountType) {
-		this.accountType = accountType;
-	}
+//	public int getAccountType(){
+//		return this.accountType;
+//	}
+//	
+//	public void setAccountType(int accountType) {
+//		this.accountType = accountType;
+//	}
 	
 	public String getAccountNumber() {
 		return this.accountNumber;
